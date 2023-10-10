@@ -5,5 +5,5 @@ namespace Application.Contracts.Persistence;
 
 public interface IQuestionRepository : IGenericRepository<Question>
 {
-    Task<List<Question>> GetQuestionsOfRound(string roundId);
+    Task<List<Question>> GetQuestionsOfRoundAsync(string roundId);
 }

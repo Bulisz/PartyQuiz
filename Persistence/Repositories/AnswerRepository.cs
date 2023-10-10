@@ -14,7 +14,7 @@ public class AnswerRepository : GenericRepository<Answer>, IAnswerRepository
         _context = context;
     }
 
-    public async Task<List<Answer>> GetAnswersOfQuestion(string questionId)
+    public async Task<List<Answer>> GetAnswersOfQuestionAsync(string questionId)
     {
         return await _context.Answers.Where(a => a.QuestionId.ToString() == questionId).ToListAsync();
     }

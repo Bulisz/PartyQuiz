@@ -14,7 +14,7 @@ public class QuestionRepository : GenericRepository<Question>, IQuestionReposito
         _context = context;
     }
 
-    public async Task<List<Question>> GetQuestionsOfRound(string roundId)
+    public async Task<List<Question>> GetQuestionsOfRoundAsync(string roundId)
     {
         return await _context.Questions.Where(q => q.RoundId.ToString() == roundId).ToListAsync();
     }

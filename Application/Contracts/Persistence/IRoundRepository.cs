@@ -5,5 +5,5 @@ namespace Application.Contracts.Persistence;
 
 public interface IRoundRepository : IGenericRepository<Round>
 {
-    Task<List<Round>> GetRoundsOfGame(string gameId);
+    Task<List<Round>> GetRoundsOfGameAsync(string gameId);
 }

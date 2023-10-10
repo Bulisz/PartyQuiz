@@ -23,6 +23,6 @@ public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, GameR
         game = await _unitOfWork.GameRepository.Add(game);
         await _unitOfWork.Save();
 
-        return game.ToGameResponseDTO();
+        return game.ToGameResponseDTO()!;
     }
 }

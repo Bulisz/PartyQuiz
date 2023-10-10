@@ -17,17 +17,31 @@ public class GameController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpGet("GetGameByName/{gameName}")]
+    public async Task<ActionResult<GameResponseDTO>> GetGameByName(string gameName)
+    {
+        var game = await _mediator.Send(new GetGameByNameQuery(gameName));
+        return Ok(game);
+    }
+
     [HttpGet(nameof(GetAllGames))]
     public async Task<ActionResult<IEnumerable<GameResponseDTO>>> GetAllGames()
     {
-        var games = await _mediator.Send(new GetAllGameQuery());
+        var games = await _mediator.Send(new GetAllGamesQuery());
         return Ok(games);
     }
 
     [HttpPost(nameof(CreateGame))]
     public async Task<ActionResult<GameResponseDTO>> CreateGame(GameRequestDTO gameRequestDTO)
     {
-        var game = await _mediator.Send(new CreateGameCommand() { GameRequestDTO = gameRequestDTO });
+        var game = await _mediator.Send(new CreateGameCommand(gameRequestDTO));
         return Ok(game);
+    }
+
+    [HttpPatch(nameof(UpdateGame))]
+    public async Task<IActionResult> UpdateGame(GameUpdateDTO gameUpdateDTO)
+    {
+        await _mediator.Send(new UpdateGameCommand(gameUpdateDTO));
+        return Ok();
     }
 }

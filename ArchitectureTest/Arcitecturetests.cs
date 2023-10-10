@@ -5,12 +5,11 @@ namespace ArchitectureTest;
 
 public class Arcitecturetests
 {
-    private const string DomainNamespace = "Domain";
-    private const string ApplicationNamespace = "Application";
-    private const string InfrastructureNamespace = "Infrastructure";
-    private const string PersistenceNamespace = "Persistence";
-    private const string PresentationNamespace = "Presentation";
-    private const string WebApiNamespace = "WebApi";
+    private const string _applicationNamespace = "Application";
+    private const string _infrastructureNamespace = "Infrastructure";
+    private const string _persistenceNamespace = "Persistence";
+    private const string _presentationNamespace = "Presentation";
+    private const string _webApiNamespace = "WebApi";
 
     [Fact]
     public void Domain_Should_Not_Have_DependencyOnOtherProjects()
@@ -20,11 +19,11 @@ public class Arcitecturetests
 
         var otherProjects = new[]
         {
-            ApplicationNamespace,
-            InfrastructureNamespace,
-            PersistenceNamespace,
-            WebApiNamespace,
-            PresentationNamespace
+            _applicationNamespace,
+            _infrastructureNamespace,
+            _persistenceNamespace,
+            _webApiNamespace,
+            _presentationNamespace
         };
 
         //Act
@@ -46,10 +45,10 @@ public class Arcitecturetests
 
         var otherProjects = new[]
         {
-            InfrastructureNamespace,
-            PersistenceNamespace,
-            WebApiNamespace,
-            PresentationNamespace
+            _infrastructureNamespace,
+            _persistenceNamespace,
+            _webApiNamespace,
+            _presentationNamespace
         };
 
         //Act
@@ -71,9 +70,9 @@ public class Arcitecturetests
 
         var otherProjects = new[]
         {
-            PersistenceNamespace,
-            WebApiNamespace,
-            PresentationNamespace
+            _persistenceNamespace,
+            _webApiNamespace,
+            _presentationNamespace
         };
 
         //Act
@@ -95,9 +94,9 @@ public class Arcitecturetests
 
         var otherProjects = new[]
         {
-            InfrastructureNamespace,
-            WebApiNamespace,
-            PresentationNamespace
+            _infrastructureNamespace,
+            _webApiNamespace,
+            _presentationNamespace
         };
 
         //Act
@@ -119,9 +118,9 @@ public class Arcitecturetests
 
         var otherProjects = new[]
         {
-            InfrastructureNamespace,
-            WebApiNamespace,
-            PersistenceNamespace
+            _infrastructureNamespace,
+            _webApiNamespace,
+            _persistenceNamespace
         };
 
         //Act

@@ -5,5 +5,5 @@ namespace Application.Contracts.Persistence;
 
 public interface IAnswerRepository : IGenericRepository<Answer>
 {
-    Task<List<Answer>> GetAnswersOfQuestion(string questionId);
+    Task<List<Answer>> GetAnswersOfQuestionAsync(string questionId);
 }

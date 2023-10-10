@@ -13,9 +13,9 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         _context = context;
     }
 
-    public async Task<T?> Get(string id)
+    public async Task<T?> Get(Guid id)
     {
-        return await _context.Set<T>().FirstOrDefaultAsync(e => e.Id.ToString() == id);
+        return await _context.Set<T>().FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task<IReadOnlyList<T>> GetAll()
@@ -29,7 +29,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
         return entity;
     }
 
-    public async Task<bool> Exists(string id)
+    public async Task<bool> Exists(Guid id)
     {
         var entity = await Get(id);
         return entity != null;

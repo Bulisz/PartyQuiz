@@ -6,9 +6,23 @@ GET {{partyQuizController}}/GetAllGames
 
 ###
 
+GET {{partyQuizController}}/GetGameByName/Valakik
+
+###
+
 POST {{partyQuizController}}/CreateGame
 Content-Type: application/json
 
 {
     "gameName" : "Mocskos Fidesz"
+}
+
+###
+
+PATCH {{partyQuizController}}/UpdateGame
+Content-Type: application/json
+
+{
+    "id" : "9ddac1bd-4659-402b-8d38-f05e2227ec77",
+    "gameName" : "Avengers"
 }
