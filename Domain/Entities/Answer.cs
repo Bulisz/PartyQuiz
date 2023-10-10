@@ -7,18 +7,18 @@ public sealed class Answer : BaseEntity
     public string AnswerText { get; private init; } = string.Empty;
     public bool IsCorrect { get; private init; }
     public Guid QuestionId { get; private init; }
-    public Question Question { get; private init; } = null!;
+    public Question Question { get; private set; } = null!;
 
-    private Answer(Guid id, string answerText, bool isCorrect, Question question) : base(id)
+    private Answer(string answerText, bool isCorrect, Guid questionId)
     {
         AnswerText = answerText;
         IsCorrect = isCorrect;
-        QuestionId = question.Id;
+        QuestionId = questionId;
     }
 
-    public static Answer Create(Guid id, string answerText, bool isCorrect, Question question)
+    public static Answer Create(string answerText, bool isCorrect, Guid questionId)
     {
-        var answer = new Answer(id, answerText, isCorrect, question);
+        var answer = new Answer(answerText, isCorrect, questionId);
 
         // ToDo validation
 

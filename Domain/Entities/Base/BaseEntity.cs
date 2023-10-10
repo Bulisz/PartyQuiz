@@ -2,9 +2,7 @@
 
 public abstract class BaseEntity : IEquatable<BaseEntity>
 {
-    public Guid Id { get; private init; }
-
-    protected BaseEntity(Guid id) => Id = id;
+    public Guid Id { get; private set; }
 
     public static bool operator ==(BaseEntity? left, BaseEntity? right)
     {

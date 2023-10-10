@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Presentation\Presentation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
+
 </Project>

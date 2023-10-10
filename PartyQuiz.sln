@@ -5,21 +5,26 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BAE7421D-A43E-404D-9277-F3D07F39AC76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{C09A225F-DE2C-46CA-AE5C-CC4571A2E938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{C09A225F-DE2C-46CA-AE5C-CC4571A2E938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{B23E8172-59FB-4022-A856-9C69AB8FDE6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{B23E8172-59FB-4022-A856-9C69AB8FDE6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\Persistence.csproj", "{FB1DB03D-E9CA-4F69-82AF-BA1E144F46A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Persistence\Persistence.csproj", "{FB1DB03D-E9CA-4F69-82AF-BA1E144F46A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{9610E9CE-B601-496A-AAEF-0EDDB7FBC80A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{9610E9CE-B601-496A-AAEF-0EDDB7FBC80A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{80E4C00E-2216-485D-A617-C80E67B7F3CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{068BEC14-ACCF-4283-B852-2D447302E45B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{068BEC14-ACCF-4283-B852-2D447302E45B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{8FE0A0E1-F3D1-487C-AB57-5CB48C041BD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{8FE0A0E1-F3D1-487C-AB57-5CB48C041BD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchitectureTest", "ArchitectureTest\ArchitectureTest.csproj", "{2710C9BC-53B9-4AB5-B84C-7595A75C976C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTest", "ArchitectureTest\ArchitectureTest.csproj", "{2710C9BC-53B9-4AB5-B84C-7595A75C976C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "httpfiles", "httpfiles", "{85A45B42-70EA-4A83-8B9A-7BA33A1018F9}"
+	ProjectSection(SolutionItems) = preProject
+		GameController.http = GameController.http
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

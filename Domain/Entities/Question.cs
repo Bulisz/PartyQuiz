@@ -11,18 +11,18 @@ public sealed class Question : BaseEntity
     public Round Round { get; private init; } = null!;
     public ICollection<Answer> Answers { get; private set; } = null!;
 
-    private Question(Guid id, int questionNumber, int fullScore, string questionText, Round round) : base(id)
+    private Question(int questionNumber, int fullScore, string questionText, Guid roundId)
     {
         QuestionNumber = questionNumber;
         FullScore = fullScore;
         QuestionText = questionText;
-        Round = round;
+        RoundId = roundId;
         Answers = new List<Answer>();
     }
 
-    public static Question Create(Guid id, int questionNumber, int fullScore, string questionText, Round round)
+    public static Question Create(int questionNumber, int fullScore, string questionText, Guid roundId)
     {
-        var Question = new Question(id, questionNumber, fullScore, questionText, round);
+        var Question = new Question(questionNumber, fullScore, questionText, roundId);
 
         //ToDo validation
 

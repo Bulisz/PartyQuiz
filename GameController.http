@@ -1,0 +1,14 @@
+@partyQuizController = https://localhost:5001/partyquiz/game
+
+###
+
+GET {{partyQuizController}}/GetAllGames
+
+###
+
+POST {{partyQuizController}}/CreateGame
+Content-Type: application/json
+
+{
+    "gameName" : "Mocskos Fidesz"
+}

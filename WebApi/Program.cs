@@ -2,7 +2,9 @@ using Application;
 using Infrastructure;
 using Persistence;
 using Presentation;
+using Presentation.Controllers;
 using Serilog;
+using System.Reflection;
 
 namespace WebApi;
 
@@ -15,20 +17,21 @@ public class Program
         builder.Services
             .AddApplication()
             .AddInfrastructure()
-            .AddPersistence()
+            .AddPersistence(builder.Configuration)
             .AddPresentation();
 
-        builder.Host.UseSerilog((context, conig) =>
-            conig.ReadFrom.Configuration(context.Configuration));
+        builder.Host.UseSerilog((context, config) =>
+            config.ReadFrom.Configuration(context.Configuration));
 
-        builder.Services.AddControllers()
-            .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
+        builder.Services.AddControllers();
 
         var app = builder.Build();
 
         app.UseSerilogRequestLogging();
 
         app.UseHttpsRedirection();
+
+        app.MapControllers();
 
         app.Run();
     }

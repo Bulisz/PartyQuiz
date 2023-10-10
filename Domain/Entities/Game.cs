@@ -7,15 +7,15 @@ public sealed class Game : BaseEntity
     public string GameName { get; private init; } = string.Empty;
     public ICollection<Round> Rounds { get; private set; } = null!;
 
-    private Game(Guid id, string gameName) : base(id)
+    private Game(string gameName)
     {
         GameName = gameName;
         Rounds = new List<Round>();
     }
 
-    public static Game Create(Guid id, string gameName)
+    public static Game Create(string gameName)
     {
-        var game = new Game(id, gameName);
+        var game = new Game(gameName);
 
         //ToDo validation
 
