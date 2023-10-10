@@ -5,9 +5,9 @@ namespace Domain.Entities;
 
 public sealed class Round : BaseEntity
 {
-    public int RoundNumber { get; private init; }
-    public string RoundName { get; private init; } = string.Empty;
-    public RoundType RoundType { get; private init; }
+    public int RoundNumber { get; set; }
+    public string RoundName { get; set; } = string.Empty;
+    public RoundType RoundType { get; set; }
     public Guid GameId { get; private init; }
     public Game Game { get; private init; } = null!;
     public ICollection<Question> Questions { get; private set; } = null!;

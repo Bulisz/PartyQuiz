@@ -16,6 +16,9 @@ public class QuestionRepository : GenericRepository<Question>, IQuestionReposito
 
     public async Task<List<Question>> GetQuestionsOfRoundAsync(string roundId)
     {
-        return await _context.Questions.Where(q => q.RoundId.ToString() == roundId).ToListAsync();
+        return await _context.Questions
+            .Include(q => q.Answers)
+            .Where(q => q.RoundId == Guid.Parse(roundId))
+            .ToListAsync();
     }
 }

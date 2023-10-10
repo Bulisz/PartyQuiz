@@ -16,6 +16,10 @@ public class GameRepository : GenericRepository<Game>, IGameRepository
 
     public async Task<Game?> GetGameByNameAsync(string gameName)
     {
-        return await _context.Games.FirstOrDefaultAsync(g => g.GameName == gameName);
+        return await _context.Games
+            .Include(g => g.Rounds)
+            .ThenInclude(r => r.Questions)
+            .ThenInclude(q => q.Answers)
+            .FirstOrDefaultAsync(g => g.GameName == gameName);
     }
 }

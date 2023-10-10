@@ -24,6 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "httpfiles", "httpfiles", "{85A45B42-70EA-4A83-8B9A-7BA33A1018F9}"
 	ProjectSection(SolutionItems) = preProject
 		GameController.http = GameController.http
+		RoundController.http = RoundController.http
 	EndProjectSection
 EndProject
 Global

@@ -16,6 +16,12 @@ public class RoundRepository : GenericRepository<Round>, IRoundRepository
 
     public async Task<List<Round>> GetRoundsOfGameAsync(string gameId)
     {
-        return await _context.Rounds.Where(r => r.GameId.ToString() == gameId).ToListAsync();
+        var a = await _context.Rounds
+            .Include(r => r.Questions)
+            .ThenInclude(q => q.Answers)
+            .Where(r => r.GameId == Guid.Parse(gameId))
+            .ToListAsync();
+
+        return a;
     }
 }

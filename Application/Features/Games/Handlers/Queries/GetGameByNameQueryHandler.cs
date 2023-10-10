@@ -1,6 +1,5 @@
 ﻿using Application.Contracts.Persistence;
 using Application.DTOs;
-using Application.Features.Games.Request.Queries;
 using Application.MappingProfiles;
 using MediatR;
 using Presentation.Controllers;
