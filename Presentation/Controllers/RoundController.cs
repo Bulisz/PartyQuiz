@@ -1,5 +1,4 @@
 ﻿using Application.DTOs;
-using Application.Features.Games.Request.Commands;
 using Application.Features.Rounds.Requests.Commands;
 using Application.Features.Rounds.Requests.Queries;
 using MediatR;
@@ -36,6 +35,13 @@ public class RoundController : ControllerBase
     public async Task<IActionResult> UpdateRound(RoundUpdateDTO roundUpdateDTO)
     {
         await _mediator.Send(new UpdateRoundCommand(roundUpdateDTO));
+        return Ok();
+    }
+
+    [HttpDelete("DeleteRound/{roundId}")]
+    public async Task<IActionResult> DeleteRound(string roundId)
+    {
+        await _mediator.Send(new DeleteRoundCommand(roundId));
         return Ok();
     }
 }

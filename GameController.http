@@ -1,16 +1,16 @@
-@partyQuizController = https://localhost:5001/partyquiz/game
+@gameController = https://localhost:5001/partyquiz/game
 
 ###
 
-GET {{partyQuizController}}/GetAllGames
+GET {{gameController}}/GetAllGames
 
 ###
 
-GET {{partyQuizController}}/GetGameByName/Avengers
+GET {{gameController}}/GetGameByName/Avengers
 
 ###
 
-POST {{partyQuizController}}/CreateGame
+POST {{gameController}}/CreateGame
 Content-Type: application/json
 
 {
@@ -19,10 +19,14 @@ Content-Type: application/json
 
 ###
 
-PATCH {{partyQuizController}}/UpdateGame
+PATCH {{gameController}}/UpdateGame
 Content-Type: application/json
 
 {
     "id" : "9ddac1bd-4659-402b-8d38-f05e2227ec77",
     "gameName" : "Avengers"
 }
+
+###
+
+DELETE {{gameController}}/DeleteGame/ebe179ad-3191-4c27-8274-d7bb3ce1fd25

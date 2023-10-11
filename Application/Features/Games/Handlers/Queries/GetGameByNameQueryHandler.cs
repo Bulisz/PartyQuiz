@@ -1,8 +1,8 @@
 ﻿using Application.Contracts.Persistence;
 using Application.DTOs;
+using Application.Features.Games.Requests.Queries;
 using Application.MappingProfiles;
 using MediatR;
-using Presentation.Controllers;
 
 namespace Application.Features.Games.Handlers.Queries;
 

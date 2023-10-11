@@ -1,7 +1,7 @@
 ﻿using Application.DTOs;
 using MediatR;
 
-namespace Presentation.Controllers;
+namespace Application.Features.Games.Requests.Queries;
 
 public class GetGameByNameQuery : IRequest<GameResponseDTO>
 {

@@ -1,7 +1,7 @@
 ﻿using Application.DTOs;
 using MediatR;
 
-namespace Application.Features.Games.Request.Commands;
+namespace Application.Features.Games.Requests.Commands;
 
 public class UpdateGameCommand : IRequest
 {

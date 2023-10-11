@@ -1,6 +1,5 @@
 ﻿using Application.Contracts.Persistence.Base;
-using Application.DTOs;
-using Application.Features.Games.Request.Commands;
+using Application.Features.Games.Requests.Commands;
 using MediatR;
 
 namespace Application.Features.Games.Handlers.Commands;
@@ -13,6 +12,7 @@ public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand>
     {
         _unitOfWork = unitOfWork;
     }
+
     public async Task Handle(UpdateGameCommand request, CancellationToken cancellationToken)
     {
         var game = await _unitOfWork.GameRepository.Get(Guid.Parse(request.GameUpdateDTO.Id));

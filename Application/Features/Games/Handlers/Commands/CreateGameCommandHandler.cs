@@ -1,8 +1,7 @@
 ﻿using Application.Contracts.Persistence.Base;
 using Application.DTOs;
-using Application.Features.Games.Request.Commands;
+using Application.Features.Games.Requests.Commands;
 using Application.MappingProfiles;
-using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Games.Handlers.Commands;

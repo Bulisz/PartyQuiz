@@ -1,6 +1,6 @@
 ﻿using Application.DTOs;
-using Application.Features.Games.Request.Commands;
-using Application.Features.Games.Request.Queries;
+using Application.Features.Games.Requests.Queries;
+using Application.Features.Games.Requests.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,6 +42,13 @@ public class GameController : ControllerBase
     public async Task<IActionResult> UpdateGame(GameUpdateDTO gameUpdateDTO)
     {
         await _mediator.Send(new UpdateGameCommand(gameUpdateDTO));
+        return Ok();
+    }
+
+    [HttpDelete("DeleteGame/{gameId}")]
+    public async Task<IActionResult> DeleteGame(string gameId)
+    {
+        await _mediator.Send(new DeleteGameCommand(gameId));
         return Ok();
     }
 }

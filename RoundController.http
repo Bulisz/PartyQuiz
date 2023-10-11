@@ -1,12 +1,12 @@
-@partyQuizController = https://localhost:5001/partyquiz/round
+@roundController = https://localhost:5001/partyquiz/round
 
 ###
 
-GET {{partyQuizController}}/GetRoundsOfGame/9ddac1bd-4659-402b-8d38-f05e2227ec77
+GET {{roundController}}/GetRoundsOfGame/9ddac1bd-4659-402b-8d38-f05e2227ec77
 
 ###
 
-POST {{partyQuizController}}/CreateRound
+POST {{roundController}}/CreateRound
 Content-Type: application/json
 
 {
@@ -18,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-PATCH {{partyQuizController}}/UpdateRound
+PATCH {{roundController}}/UpdateRound
 Content-Type: application/json
 
 {
@@ -28,3 +28,7 @@ Content-Type: application/json
     "RoundType" : "WarmUp",
     "gameId" : "9ddac1bd-4659-402b-8d38-f05e2227ec77"
 }
+
+###
+
+DELETE {{roundController}}/DeleteRound/3d473cac-22a4-49f7-a525-cc253e6872f7
