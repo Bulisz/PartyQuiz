@@ -4,8 +4,8 @@ namespace Domain.Entities;
 
 public sealed class Answer : BaseEntity
 {
-    public string AnswerText { get; private init; } = string.Empty;
-    public bool IsCorrect { get; private init; }
+    public string AnswerText { get; set; } = string.Empty;
+    public bool IsCorrect { get; set; }
     public Guid QuestionId { get; private init; }
     public Question Question { get; private set; } = null!;
 

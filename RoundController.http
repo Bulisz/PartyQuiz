@@ -12,7 +12,7 @@ Content-Type: application/json
 {
     "roundNumber" : 2,
     "roundName" : "abcd",
-    "RoundType" : "ABCD",
+    "roundType" : "ABCD",
     "gameId" : "9ddac1bd-4659-402b-8d38-f05e2227ec77"
 }
 
@@ -25,7 +25,7 @@ Content-Type: application/json
     "id" : "efb33970-835a-449b-a9c1-d7c1e9751977",
     "roundNumber" : 1,
     "roundName" : "Elokeszites",
-    "RoundType" : "WarmUp",
+    "roundType" : "WarmUp",
     "gameId" : "9ddac1bd-4659-402b-8d38-f05e2227ec77"
 }
 

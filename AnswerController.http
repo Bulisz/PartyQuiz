@@ -1,0 +1,31 @@
+@answerController = https://localhost:5001/partyquiz/answer
+
+###
+
+GET {{answerController}}/GetAnswersOfQuestion/1898ea2c-c6f9-47af-9e5d-6fe2f7a3064a
+
+###
+
+POST {{answerController}}/CreateAnswer
+Content-Type: application/json
+
+{
+    "answerText" : "sqsqq",
+    "isCorrect" : false,
+    "questionId" : "1898ea2c-c6f9-47af-9e5d-6fe2f7a3064a"
+}
+
+###
+
+PATCH {{answerController}}/UpdateAnswer
+Content-Type: application/json
+
+{
+    "id" : "cfb8c105-e1f6-432d-b952-2fb91d7033b5",
+    "answerText" : "eeeeeeeee  eeee  eeee",
+    "isCorrect" : true
+}
+
+###
+
+DELETE {{answerController}}/DeleteAnswer/cfb8c105-e1f6-432d-b952-2fb91d7033b5

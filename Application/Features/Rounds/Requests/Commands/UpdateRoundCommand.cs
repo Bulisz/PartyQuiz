@@ -5,7 +5,7 @@ namespace Application.Features.Rounds.Requests.Commands;
 
 public class UpdateRoundCommand : IRequest
 {
-    public RoundUpdateDTO RoundUpdateDTO { get; private init; }
+    public RoundUpdateDTO RoundUpdateDTO { get; }
 
     public UpdateRoundCommand(RoundUpdateDTO roundUpdateDTO)
     {

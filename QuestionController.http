@@ -1,0 +1,33 @@
+@questionController = https://localhost:5001/partyquiz/question
+
+###
+
+GET {{questionController}}/GetQuestionsOfRound/efb33970-835a-449b-a9c1-d7c1e9751977
+
+###
+
+POST {{questionController}}/CreateQuestion
+Content-Type: application/json
+
+{
+    "questionNumber" : 2,
+    "fullScore" : 4,
+    "questionText" : "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "roundId" : "efb33970-835a-449b-a9c1-d7c1e9751977"
+}
+
+###
+
+PATCH {{questionController}}/UpdateQuestion
+Content-Type: application/json
+
+{
+    "id" : "1898ea2c-c6f9-47af-9e5d-6fe2f7a3064a",
+    "questionNumber" : 1,
+    "fullScore" : 3,
+    "questionText" : "WarmUpsssssss"
+}
+
+###
+
+DELETE {{questionController}}/DeleteQuestion/cbbaaabe-9010-4f24-943f-26b285a3b145

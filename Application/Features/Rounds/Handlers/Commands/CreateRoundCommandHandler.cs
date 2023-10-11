@@ -19,7 +19,7 @@ public class CreateRoundCommandHandler : IRequestHandler<CreateRoundCommand, Rou
     {
         var round = request.RoundRequestDTO.ToRound();
 
-        round = await _unitOfWork.RoundRepository.Add(round);
+        await _unitOfWork.RoundRepository.Add(round);
         await _unitOfWork.Save();
 
         return round.ToRoundResponseDTO();

@@ -5,7 +5,7 @@ namespace Application.Features.Games.Requests.Commands;
 
 public class DeleteGameCommand : IRequest
 {
-    public string GameId  { get; private set; }
+    public string GameId  { get; }
     public DeleteGameCommand(string gameId)
     {
         GameId = gameId;

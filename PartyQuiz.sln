@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchitectureTest", "Archite
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "httpfiles", "httpfiles", "{85A45B42-70EA-4A83-8B9A-7BA33A1018F9}"
 	ProjectSection(SolutionItems) = preProject
+		AnswerController.http = AnswerController.http
 		GameController.http = GameController.http
+		QuestionController.http = QuestionController.http
 		RoundController.http = RoundController.http
 	EndProjectSection
 EndProject

@@ -19,7 +19,7 @@ public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, GameR
     {
         var game = request.GameRequestDTO.ToGame();
 
-        game = await _unitOfWork.GameRepository.Add(game);
+        await _unitOfWork.GameRepository.Add(game);
         await _unitOfWork.Save();
 
         return game.ToGameResponseDTO()!;
