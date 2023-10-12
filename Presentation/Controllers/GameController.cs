@@ -1,10 +1,9 @@
 ﻿using Application.DTOs;
-using Application.Features.Games.Requests.Queries;
+using Application.Exceptions;
 using Application.Features.Games.Requests.Commands;
+using Application.Features.Games.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Application.Exceptions;
-using System.Text.Json;
 
 namespace Presentation.Controllers;
 

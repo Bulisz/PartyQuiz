@@ -32,7 +32,7 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     public async Task<bool> Exists(Guid id)
     {
         var entity = await Get(id);
-        return entity != null;
+        return entity is not null;
     }
 
     public void Update(T entity)

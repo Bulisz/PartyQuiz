@@ -14,7 +14,8 @@ public class UpdateGameCommandValidator : AbstractValidator<UpdateGameCommand>
 
         RuleFor(ugc => ugc.GameUpdateDTO.GameName)
             .MustAsync(async (gn, token) => await _gameRepository.GetGameByNameAsync(gn) is null)
-            .OverridePropertyName("gameName")
-            .WithMessage("{PropertyValue} already exists");
+            .WithMessage("{PropertyValue} already exists")
+            .NotEmpty()
+            .OverridePropertyName("gameName");
     }
 }

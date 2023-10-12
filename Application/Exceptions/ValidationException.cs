@@ -15,13 +15,6 @@ public class QuizValidationException : Exception
             Errors[i] = new InvalidFields(errors[i].PropertyName, errors[i].ErrorMessage);
         }
     }
-
-    public QuizValidationException(string? message, string field, string fieldMessage) : base(message)
-    {
-        Errors = new InvalidFields[1];
-        Errors[0] = new InvalidFields(field, fieldMessage);
-    }
-
     public class InvalidFields
     {
         public string Field { get; }
