@@ -1,5 +1,7 @@
 ﻿using Application.Contracts.Persistence.Base;
+using Application.Exceptions;
 using Application.Features.Games.Requests.Commands;
+using Application.Features.Games.Validators;
 using MediatR;
 
 namespace Application.Features.Games.Handlers.Commands;
@@ -15,6 +17,12 @@ public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand>
 
     public async Task Handle(UpdateGameCommand request, CancellationToken cancellationToken)
     {
+        var validator = new UpdateGameCommandValidator(_unitOfWork.GameRepository);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+
         var game = await _unitOfWork.GameRepository.Get(Guid.Parse(request.GameUpdateDTO.Id));
 
         if (game is not null)

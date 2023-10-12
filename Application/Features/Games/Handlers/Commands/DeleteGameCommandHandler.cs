@@ -1,4 +1,5 @@
 ﻿using Application.Contracts.Persistence.Base;
+using Application.Exceptions;
 using Application.Features.Games.Requests.Commands;
 using MediatR;
 
@@ -22,5 +23,7 @@ public class DeleteGameCommandHandler : IRequestHandler<DeleteGameCommand>
             _unitOfWork.GameRepository.Delete(game);
             await _unitOfWork.Save();
         }
+        else
+            throw new QuizValidationException("Some vaidation error occcurs", "gameId", $"{request.GameId} is invalid Id");
     }
 }

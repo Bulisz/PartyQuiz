@@ -5,7 +5,7 @@ namespace Domain.Entities;
 public sealed class Game : BaseEntity
 {
     public string GameName { get; set; } = string.Empty;
-    public ICollection<Round> Rounds { get; private set; } = null!;
+    public ICollection<Round> Rounds { get; private init; } = null!;
 
     private Game(string gameName)
     {
@@ -17,10 +17,6 @@ public sealed class Game : BaseEntity
     {
         var game = new Game(gameName);
 
-        //ToDo validation
-
         return game;
     }
-
-    public void AddRound(Round round) => Rounds.Add(round);
 }

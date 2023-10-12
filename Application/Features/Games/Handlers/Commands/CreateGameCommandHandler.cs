@@ -1,6 +1,8 @@
 ﻿using Application.Contracts.Persistence.Base;
 using Application.DTOs;
+using Application.Exceptions;
 using Application.Features.Games.Requests.Commands;
+using Application.Features.Games.Validators;
 using Application.MappingProfiles;
 using MediatR;
 
@@ -17,6 +19,12 @@ public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, GameR
 
     public async Task<GameResponseDTO> Handle(CreateGameCommand request, CancellationToken cancellationToken)
     {
+        var validator = new CreateGameCommandValidator(_unitOfWork.GameRepository);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new QuizValidationException("Some vaidation error occcurs",validationResult.Errors);
+
         var game = request.GameRequestDTO.ToGame();
 
         await _unitOfWork.GameRepository.Add(game);

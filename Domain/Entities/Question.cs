@@ -9,7 +9,7 @@ public sealed class Question : BaseEntity
     public string QuestionText { get; set; } = string.Empty;
     public Guid RoundId { get; private init; }
     public Round Round { get; private init; } = null!;
-    public ICollection<Answer> Answers { get; private set; } = null!;
+    public ICollection<Answer> Answers { get; private init; } = null!;
 
     private Question(int questionNumber, int fullScore, string questionText, Guid roundId)
     {
@@ -24,15 +24,6 @@ public sealed class Question : BaseEntity
     {
         var Question = new Question(questionNumber, fullScore, questionText, roundId);
 
-        //ToDo validation
-
         return Question;
-    }
-
-    public void AddAnswer(Answer answer)
-    {
-        //ToDo validation
-
-        Answers.Add(answer);
     }
 }

@@ -14,7 +14,7 @@ POST {{gameController}}/CreateGame
 Content-Type: application/json
 
 {
-    "gameName" : "Mocskos Fidesz"
+    "gameName" : "Mocskos Kutyák"
 }
 
 ###
@@ -24,9 +24,9 @@ Content-Type: application/json
 
 {
     "id" : "9ddac1bd-4659-402b-8d38-f05e2227ec77",
-    "gameName" : "Avengers"
+    "gameName" : "Mocskos Faszok"
 }
 
 ###
 
-DELETE {{gameController}}/DeleteGame/ebe179ad-3191-4c27-8274-d7bb3ce1fd25
+DELETE {{gameController}}/DeleteGame/9ddac1bd-4659-402b-8d38-f05e2227ec77

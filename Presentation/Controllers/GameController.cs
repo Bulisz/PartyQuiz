@@ -3,6 +3,8 @@ using Application.Features.Games.Requests.Queries;
 using Application.Features.Games.Requests.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Application.Exceptions;
+using System.Text.Json;
 
 namespace Presentation.Controllers;
 
@@ -34,21 +36,42 @@ public class GameController : ControllerBase
     [HttpPost(nameof(CreateGame))]
     public async Task<ActionResult<GameResponseDTO>> CreateGame(GameRequestDTO gameRequestDTO)
     {
-        var game = await _mediator.Send(new CreateGameCommand(gameRequestDTO));
-        return Ok(game);
+        try
+        {
+            var game = await _mediator.Send(new CreateGameCommand(gameRequestDTO));
+            return Ok(game);
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpPatch(nameof(UpdateGame))]
     public async Task<IActionResult> UpdateGame(GameUpdateDTO gameUpdateDTO)
     {
-        await _mediator.Send(new UpdateGameCommand(gameUpdateDTO));
-        return Ok();
+        try
+        {
+            await _mediator.Send(new UpdateGameCommand(gameUpdateDTO));
+            return Ok();
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpDelete("DeleteGame/{gameId}")]
     public async Task<IActionResult> DeleteGame(string gameId)
     {
-        await _mediator.Send(new DeleteGameCommand(gameId));
-        return Ok();
+        try
+        {
+            await _mediator.Send(new DeleteGameCommand(gameId));
+            return Ok();
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors});
+        }
     }
 }
