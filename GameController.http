@@ -14,7 +14,7 @@ POST {{gameController}}/CreateGame
 Content-Type: application/json
 
 {
-    "gameName" : ""
+    "gameName" : "Avengers"
 }
 
 ###
@@ -23,8 +23,8 @@ PATCH {{gameController}}/UpdateGame
 Content-Type: application/json
 
 {
-    "id" : "9ddac1bd-4659-402b-8d38-f05e2227ec77",
-    "gameName" : "Mocskos Faszok"
+    "id" : "4f8433ca-592e-4b28-ad32-a433b9b74e6c",
+    "gameName" : "Avengers"
 }
 
 ###

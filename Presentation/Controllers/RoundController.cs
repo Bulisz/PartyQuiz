@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Exceptions;
 using Application.Features.Rounds.Requests.Commands;
 using Application.Features.Rounds.Requests.Queries;
 using MediatR;
@@ -27,21 +28,42 @@ public class RoundController : ControllerBase
     [HttpPost(nameof(CreateRound))]
     public async Task<ActionResult<RoundResponseDTO>> CreateRound(RoundRequestDTO roundRequestDTO)
     {
-        var round = await _mediator.Send(new CreateRoundCommand(roundRequestDTO));
-        return Ok(round);
+        try
+        {
+            var round = await _mediator.Send(new CreateRoundCommand(roundRequestDTO));
+            return Ok(round);
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors});
+        }
     }
 
     [HttpPatch(nameof(UpdateRound))]
     public async Task<IActionResult> UpdateRound(RoundUpdateDTO roundUpdateDTO)
     {
-        await _mediator.Send(new UpdateRoundCommand(roundUpdateDTO));
-        return Ok();
+        try
+        {
+            await _mediator.Send(new UpdateRoundCommand(roundUpdateDTO));
+            return Ok();
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpDelete("DeleteRound/{roundId}")]
     public async Task<IActionResult> DeleteRound(string roundId)
     {
-        await _mediator.Send(new DeleteRoundCommand(roundId));
-        return Ok();
+        try
+        {
+            await _mediator.Send(new DeleteRoundCommand(roundId));
+            return Ok();
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 }

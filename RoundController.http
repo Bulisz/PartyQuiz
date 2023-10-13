@@ -2,7 +2,7 @@
 
 ###
 
-GET {{roundController}}/GetRoundsOfGame/9ddac1bd-4659-402b-8d38-f05e2227ec77
+GET {{roundController}}/GetRoundsOfGame/03c37ef5-6c0c-4d82-9dc3-266029df76f3
 
 ###
 
@@ -10,10 +10,10 @@ POST {{roundController}}/CreateRound
 Content-Type: application/json
 
 {
-    "roundNumber" : 2,
-    "roundName" : "abcd",
+    "roundNumber" : 1,
+    "roundName" : "sdfdfa",
     "roundType" : "ABCD",
-    "gameId" : "9ddac1bd-4659-402b-8d38-f05e2227ec77"
+    "gameId" : "03c37ef5-6c0c-4d82-9dc3-266029df76f3"
 }
 
 ###
@@ -22,13 +22,13 @@ PATCH {{roundController}}/UpdateRound
 Content-Type: application/json
 
 {
-    "id" : "efb33970-835a-449b-a9c1-d7c1e9751977",
+    "id" : "9433625d-4eea-4b7d-bc05-52dbca2f272f",
     "roundNumber" : 1,
     "roundName" : "Elokeszites",
     "roundType" : "WarmUp",
-    "gameId" : "9ddac1bd-4659-402b-8d38-f05e2227ec77"
+    "gameId" : "4f8433ca-592e-4b28-ad32-a433b9b74e69"
 }
 
 ###
 
-DELETE {{roundController}}/DeleteRound/3d473cac-22a4-49f7-a525-cc253e6872f7
+DELETE {{roundController}}/DeleteRound/76cfe482-7e5b-40de-919b-7fb921bf8b9b

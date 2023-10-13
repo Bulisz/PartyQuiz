@@ -6,4 +6,5 @@ public record RoundUpdateDTO(
     string Id,
     int RoundNumber,
     string RoundName,
-    string RoundType) : BaseDTO(Id);
+    string RoundType,
+    string GameId) : BaseDTO(Id);

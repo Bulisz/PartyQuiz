@@ -19,9 +19,7 @@ public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionComman
 
         if (question is not null)
         {
-            question.QuestionNumber = request.QuestionUpdateDTO.QuestionNumber;
-            question.FullScore = request.QuestionUpdateDTO.FullScore;
-            question.QuestionText = request.QuestionUpdateDTO.QuestionText;
+            question.Modify(request.QuestionUpdateDTO.FullScore, request.QuestionUpdateDTO.QuestionText);
 
             _unitOfWork.QuestionRepository.Update(question);
             await _unitOfWork.Save();

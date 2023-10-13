@@ -25,8 +25,7 @@ public class DeleteGameCommandHandler : IRequestHandler<DeleteGameCommand>
 
         var game = await _unitOfWork.GameRepository.Get(Guid.Parse(request.GameId));
 
-        _unitOfWork.GameRepository.Delete(game);
+        _unitOfWork.GameRepository.Delete(game!);
         await _unitOfWork.Save();
-
     }
 }

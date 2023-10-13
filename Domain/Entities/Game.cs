@@ -4,7 +4,7 @@ namespace Domain.Entities;
 
 public sealed class Game : BaseEntity
 {
-    public string GameName { get; set; } = string.Empty;
+    public string GameName { get; private set; } = string.Empty;
     public ICollection<Round> Rounds { get; private init; } = null!;
 
     private Game(string gameName)
@@ -18,5 +18,10 @@ public sealed class Game : BaseEntity
         var game = new Game(gameName);
 
         return game;
+    }
+
+    public void Modify(string gameName)
+    {
+        GameName = gameName;
     }
 }

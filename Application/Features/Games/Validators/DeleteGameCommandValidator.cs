@@ -1,5 +1,6 @@
 ﻿using Application.Contracts.Persistence;
 using Application.Features.Games.Requests.Commands;
+using Application.Helpers;
 using FluentValidation;
 
 namespace Application.Features.Games.Validators
@@ -14,10 +15,9 @@ namespace Application.Features.Games.Validators
 
             RuleFor(dgc => dgc.GameId)
                 .Cascade(CascadeMode.Stop)
-                .Must(gi => Guid.TryParse(gi, out _))
-                .WithMessage("{PropertyValue} is not valid Id")
+                .ValidGuid()
                 .MustAsync(async (gi, token) => await _gameRepository.Exists(Guid.Parse(gi)))
-                .WithMessage("{PropertyValue} does not exists")
+                    .WithMessage("{PropertyValue} nem létezik")
                 .OverridePropertyName("gameId");
         }
     }

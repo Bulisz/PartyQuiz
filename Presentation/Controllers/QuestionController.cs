@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Exceptions;
 using Application.Features.Questions.Requests.Commands;
 using Application.Features.Questions.Requests.Queries;
 using MediatR;
@@ -27,21 +28,42 @@ public class QuestionController : ControllerBase
     [HttpPost(nameof(CreateQuestion))]
     public async Task<ActionResult<QuestionResponseDTO>> CreateQuestion(QuestionRequestDTO questionRequestDTO)
     {
-        var question = await _mediator.Send(new CreateQuestionCommand(questionRequestDTO));
-        return Ok(question);
+        try
+        {
+            var question = await _mediator.Send(new CreateQuestionCommand(questionRequestDTO));
+            return Ok(question);
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpPatch(nameof(UpdateQuestion))]
     public async Task<IActionResult> UpdateQuestion(QuestionUpdateDTO questionUpdateDTO)
     {
-        await _mediator.Send(new UpdateQuestionCommand(questionUpdateDTO));
-        return Ok();
+        try
+        { 
+            await _mediator.Send(new UpdateQuestionCommand(questionUpdateDTO));
+            return Ok();
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpDelete("DeleteQuestion/{questionId}")]
     public async Task<IActionResult> DeleteQuestion(string questionId)
     {
-        await _mediator.Send(new DeleteQuestionCommand(questionId));
-        return Ok();
+        try
+        {
+            await _mediator.Send(new DeleteQuestionCommand(questionId));
+            return Ok();
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 }

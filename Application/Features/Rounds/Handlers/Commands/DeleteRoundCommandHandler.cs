@@ -1,4 +1,6 @@
 ﻿using Application.Contracts.Persistence.Base;
+using Application.Exceptions;
+using Application.Features.Rounds.Validators;
 using Application.Features.Rounds.Requests.Commands;
 using MediatR;
 
@@ -15,12 +17,15 @@ public class DeleteRoundCommandHandler : IRequestHandler<DeleteRoundCommand>
 
     public async Task Handle(DeleteRoundCommand request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteRoundCommandValidator(_unitOfWork.RoundRepository);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+
         var round = await _unitOfWork.RoundRepository.Get(Guid.Parse(request.RoundId));
 
-        if (round is not null)
-        {
-            _unitOfWork.RoundRepository.Delete(round);
-            await _unitOfWork.Save();
-        }
+        _unitOfWork.RoundRepository.Delete(round!);
+        await _unitOfWork.Save();
     }
 }

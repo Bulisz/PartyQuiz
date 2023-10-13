@@ -27,7 +27,7 @@ public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand>
 
         if (game is not null)
         {
-            game.GameName = request.GameUpdateDTO.GameName;
+            game.Modify(request.GameUpdateDTO.GameName);
 
             _unitOfWork.GameRepository.Update(game);
             await _unitOfWork.Save();

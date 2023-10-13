@@ -4,9 +4,9 @@ namespace Domain.Entities;
 
 public sealed class Question : BaseEntity
 {
-    public int QuestionNumber { get; set; }
-    public int FullScore { get; set; }
-    public string QuestionText { get; set; } = string.Empty;
+    public int QuestionNumber { get; private init; }
+    public int FullScore { get; private set; }
+    public string QuestionText { get; private set; } = string.Empty;
     public Guid RoundId { get; private init; }
     public Round Round { get; private init; } = null!;
     public ICollection<Answer> Answers { get; private init; } = null!;
@@ -25,5 +25,11 @@ public sealed class Question : BaseEntity
         var Question = new Question(questionNumber, fullScore, questionText, roundId);
 
         return Question;
+    }
+
+    public void Modify(int fullScore, string questionText)
+    {
+        FullScore = fullScore;
+        QuestionText = questionText;
     }
 }

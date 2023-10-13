@@ -20,8 +20,7 @@ public class UpdateAnswerCommandHandler : IRequestHandler<UpdateAnswerCommand>
 
         if (answer is not null)
         {
-            answer.AnswerText = request.AnswerUpdateDTO.AnswerText;
-            answer.IsCorrect = request.AnswerUpdateDTO.IsCorrect;
+            answer.Modify(request.AnswerUpdateDTO.AnswerText, request.AnswerUpdateDTO.IsCorrect);
 
             _unitOfWork.AnswerRepository.Update(answer);
             await _unitOfWork.Save();
