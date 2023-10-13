@@ -1,5 +1,7 @@
 ﻿using Application.Contracts.Persistence.Base;
+using Application.Exceptions;
 using Application.Features.Questions.Requests.Commands;
+using Application.Features.Questions.Validators;
 using MediatR;
 
 namespace Application.Features.Questions.Handlers.Commands;
@@ -15,12 +17,15 @@ public class DeleteQuestionCommandHandler : IRequestHandler<DeleteQuestionComman
 
     public async Task Handle(DeleteQuestionCommand request, CancellationToken cancellationToken)
     {
+        var validator = new DeleteQuestionCommandValidator(_unitOfWork.QuestionRepository);
+        var validationResult = await validator.ValidateAsync(request, cancellationToken);
+
+        if (!validationResult.IsValid)
+            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+
         var question = await _unitOfWork.QuestionRepository.Get(Guid.Parse(request.QuestionId));
 
-        if (question is not null)
-        {
-            _unitOfWork.QuestionRepository.Delete(question);
-            await _unitOfWork.Save();
-        }
+        _unitOfWork.QuestionRepository.Delete(question!);
+        await _unitOfWork.Save();
     }
 }

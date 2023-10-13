@@ -1,3 +1,3 @@
 ﻿namespace Application.DTOs;
 
-public record QuestionRequestDTO(int QuestionNumber, int FullScore, string QuestionText, string RoundId);
+public record QuestionRequestDTO(int FullScore, string QuestionText, string RoundId);

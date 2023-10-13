@@ -5,9 +5,9 @@ namespace Application.MappingProfiles;
 
 public static class QuestionMappingProfile
 {
-    public static Question ToQuestion(this QuestionRequestDTO questionRequestDTO) =>
+    public static Question ToQuestion(this QuestionRequestDTO questionRequestDTO, int questionNumber) =>
         Question.Create(
-            questionRequestDTO.QuestionNumber,
+            questionNumber,
             questionRequestDTO.FullScore,
             questionRequestDTO.QuestionText,
             Guid.Parse(questionRequestDTO.RoundId));

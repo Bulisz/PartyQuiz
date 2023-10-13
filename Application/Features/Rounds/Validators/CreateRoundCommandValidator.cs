@@ -14,8 +14,8 @@ public class CreateRoundCommandValidator : AbstractValidator<CreateRoundCommand>
         _roundRepository = roundRepository;
 
         RuleFor(crc => crc.RoundRequestDTO.RoundNumber)
-            .GreaterThan(0).WithMessage("A kör száma legyen nagyobb mint 0")
-            .LessThanOrEqualTo(10).WithMessage("A maximum kör szám 10")
+            .GreaterThan(0)
+            .LessThanOrEqualTo(10)
             .MustAsync(async (ctx, rn, token) =>
                 (await _roundRepository.GetRoundsOfGameAsync(ctx.RoundRequestDTO.GameId)).All(r => r.RoundNumber != rn))
                 .WithMessage("Ilyen számú kör már van")
