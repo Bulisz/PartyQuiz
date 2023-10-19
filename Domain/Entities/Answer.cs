@@ -5,7 +5,7 @@ namespace Domain.Entities;
 public sealed class Answer : BaseEntity
 {
     public string AnswerText { get; private set; } = string.Empty;
-    public bool IsCorrect { get; private set; }
+    public bool IsCorrect { get; private init; }
     public Guid QuestionId { get; private init; }
     public Question Question { get; private init; } = null!;
 
@@ -23,9 +23,8 @@ public sealed class Answer : BaseEntity
         return answer;
     }
 
-    public void Modify(string answerText, bool isCorrect)
+    public void Modify(string answerText)
     {
         AnswerText = answerText;
-        IsCorrect = isCorrect;
     }
 }

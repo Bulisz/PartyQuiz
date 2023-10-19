@@ -2,6 +2,7 @@
 using Application.Exceptions;
 using Application.Features.Rounds.Requests.Commands;
 using Application.Features.Rounds.Requests.Queries;
+using Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +17,13 @@ public class RoundController : ControllerBase
     public RoundController(IMediator mediator)
     {
         _mediator = mediator;
+    }
+
+    [HttpGet(nameof(GetRoundTypes))]
+    public ActionResult<IEnumerable<string>> GetRoundTypes()
+    {
+        var roundTypes = Enum.GetNames(typeof(RoundType));
+        return Ok(roundTypes.ToList());
     }
 
     [HttpGet("GetRoundsOfGame/{gameId}")]

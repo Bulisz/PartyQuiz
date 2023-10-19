@@ -2,9 +2,7 @@ using Application;
 using Infrastructure;
 using Persistence;
 using Presentation;
-using Presentation.Controllers;
 using Serilog;
-using System.Reflection;
 
 namespace WebApi;
 

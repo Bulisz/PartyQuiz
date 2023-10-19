@@ -17,7 +17,7 @@ public class UpdateAnswerCommandHandler : IRequestHandler<UpdateAnswerCommand>
 
     public async Task Handle(UpdateAnswerCommand request, CancellationToken cancellationToken)
     {
-        var validator = new UpdateAnswerCommandValidator(_unitOfWork.AnswerRepository);
+        var validator = new UpdateAnswerCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
 
         if (!validationResult.IsValid)
@@ -27,7 +27,7 @@ public class UpdateAnswerCommandHandler : IRequestHandler<UpdateAnswerCommand>
 
         if (answer is not null)
         {
-            answer.Modify(request.AnswerUpdateDTO.AnswerText, request.AnswerUpdateDTO.IsCorrect);
+            answer.Modify(request.AnswerUpdateDTO.AnswerText);
 
             _unitOfWork.AnswerRepository.Update(answer);
             await _unitOfWork.Save();

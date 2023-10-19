@@ -2,6 +2,10 @@
 
 ###
 
+GET {{roundController}}/GetRoundTypes
+
+###
+
 GET {{roundController}}/GetRoundsOfGame/03c37ef5-6c0c-4d82-9dc3-266029df76f3
 
 ###
