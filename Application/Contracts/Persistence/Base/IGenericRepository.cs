@@ -1,8 +1,8 @@
-﻿using Domain.Entities.Base;
+﻿using CSharpFunctionalExtensions;
 
 namespace Application.Contracts.Persistence.Base;
 
-public interface IGenericRepository<T> where T : BaseEntity
+public interface IGenericRepository<T> where T : Entity<Guid>
 {
     Task<T?> Get(Guid id);
     Task<IReadOnlyList<T>> GetAll();

@@ -1,8 +1,8 @@
-﻿using Domain.Entities.Base;
+﻿using CSharpFunctionalExtensions;
 
-namespace Domain.Entities;
+namespace Domain.Games;
 
-public sealed class Answer : BaseEntity
+public class Answer : Entity<Guid>
 {
     public string AnswerText { get; private set; } = string.Empty;
     public bool IsCorrect { get; private init; }
@@ -16,15 +16,17 @@ public sealed class Answer : BaseEntity
         QuestionId = questionId;
     }
 
-    public static Answer Create(string answerText, bool isCorrect, Guid questionId)
+    public static Result<Answer> Create(string answerText, bool isCorrect, Guid questionId)
     {
         var answer = new Answer(answerText, isCorrect, questionId);
 
         return answer;
     }
 
-    public void Modify(string answerText)
+    public Result Modify(string answerText)
     {
         AnswerText = answerText;
+
+        return Result.Success();
     }
 }

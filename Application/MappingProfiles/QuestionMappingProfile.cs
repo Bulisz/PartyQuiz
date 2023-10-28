@@ -1,5 +1,5 @@
 ﻿using Application.DTOs;
-using Domain.Entities;
+using Domain.Games;
 
 namespace Application.MappingProfiles;
 
@@ -10,7 +10,7 @@ public static class QuestionMappingProfile
             questionNumber,
             questionRequestDTO.FullScore,
             questionRequestDTO.QuestionText,
-            Guid.Parse(questionRequestDTO.RoundId));
+            Guid.Parse(questionRequestDTO.RoundId)).Value;
 
     public static QuestionResponseDTO ToQuestionResponseDTO(this Question question)
     {

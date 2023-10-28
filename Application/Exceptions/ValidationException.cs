@@ -1,11 +1,11 @@
 ﻿using FluentValidation.Results;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Application.Exceptions;
 
 public class QuizValidationException : Exception
 {
-    public InvalidFields[] Errors { get; }
+    public InvalidFields[] Errors { get; private set; }
+
     public QuizValidationException(string? message, List<ValidationFailure> errors) : base(message)
     {
         Errors = new InvalidFields[errors.Count];
@@ -15,6 +15,12 @@ public class QuizValidationException : Exception
             Errors[i] = new InvalidFields(errors[i].PropertyName, errors[i].ErrorMessage);
         }
     }
+    public QuizValidationException(string? message, string fieldName, string fieldMessage) : base(message)
+    {
+        Errors = new InvalidFields[1];
+        Errors[0] = new InvalidFields(fieldName, fieldMessage);
+    }
+
     public class InvalidFields
     {
         public string Field { get; }

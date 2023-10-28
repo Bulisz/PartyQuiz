@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Persistence;
-using Domain.Entities;
+using Domain.Games;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Base;
 

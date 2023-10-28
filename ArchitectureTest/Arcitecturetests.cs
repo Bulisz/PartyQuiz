@@ -133,4 +133,23 @@ public class Arcitecturetests
         //Assert
         testResult.IsSuccessful.Should().BeTrue();
     }
+
+    [Fact]
+    public void Controllers_ShouldHaveDependencyOn_MediatR()
+    {
+        //Arrange
+        var assembly = typeof(Presentation.AssemblyReference).Assembly;
+
+        //Act
+        var testResult = Types
+            .InAssembly(assembly)
+            .That()
+            .HaveNameEndingWith("Controller")
+            .Should()
+            .HaveDependencyOn("MediatR")
+            .GetResult();
+
+        //Assert
+        testResult.IsSuccessful.Should().BeTrue();
+    }
 }

@@ -1,4 +1,4 @@
-@gameController = https://localhost:5001/partyquiz/game
+@gameController = https://localhost:5003/partyquiz/game
 
 ###
 
@@ -14,7 +14,7 @@ POST {{gameController}}/CreateGame
 Content-Type: application/json
 
 {
-    "gameName" : "Avengers"
+    "gameName" : "Spiderman"
 }
 
 ###
@@ -23,10 +23,10 @@ PATCH {{gameController}}/UpdateGame
 Content-Type: application/json
 
 {
-    "id" : "4f8433ca-592e-4b28-ad32-a433b9b74e6c",
+    "id" : "f0e129d4-31a5-40fd-842a-fb1438714977",
     "gameName" : "Avengers"
 }
 
 ###
 
-DELETE {{gameController}}/DeleteGame/7bf198eb-cc82-4e3d-86ed-007de6b8b58a
+DELETE {{gameController}}/DeleteGame/f0e129d4-31a5-40fd-842a-fb1438714977

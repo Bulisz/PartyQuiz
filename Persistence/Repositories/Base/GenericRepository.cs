@@ -1,10 +1,10 @@
 ﻿using Application.Contracts.Persistence.Base;
-using Domain.Entities.Base;
+using CSharpFunctionalExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Repositories.Base;
 
-public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+public class GenericRepository<T> : IGenericRepository<T> where T : Entity<Guid>
 {
     private readonly PartyQuizDbContext _context;
 

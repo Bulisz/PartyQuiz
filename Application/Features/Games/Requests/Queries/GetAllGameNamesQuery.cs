@@ -3,6 +3,6 @@ using MediatR;
 
 namespace Application.Features.Games.Requests.Queries;
 
-public class GetAllGamesQuery : IRequest<List<GameResponseDTO>>
+public class GetAllGameNamesQuery : IRequest<List<GameResponseDTO>>
 {
 }

@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Persistence.Base;
-using Domain.Entities;
+using Domain.Games;
 
 namespace Application.Contracts.Persistence;
 

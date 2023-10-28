@@ -1,5 +1,4 @@
-﻿using Application.Contracts.Persistence;
-using MediatR;
+﻿using MediatR;
 
 namespace Application.Features.Games.Requests.Commands;
 

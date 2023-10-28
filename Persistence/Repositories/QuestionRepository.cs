@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Persistence;
-using Domain.Entities;
+using Domain.Games;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Base;
 
@@ -20,5 +20,12 @@ public class QuestionRepository : GenericRepository<Question>, IQuestionReposito
             .Include(q => q.Answers)
             .Where(q => q.RoundId == Guid.Parse(roundId))
             .ToListAsync();
+    }
+
+    public new async Task<Question?> Get(Guid id)
+    {
+        return await _context.Questions
+            .Include(q => q.Answers)
+            .FirstOrDefaultAsync(q => q.Id == id);
     }
 }

@@ -1,8 +1,8 @@
-@questionController = https://localhost:5001/partyquiz/question
+@questionController = https://localhost:5003/partyquiz/question
 
 ###
 
-GET {{questionController}}/GetQuestionsOfRound/efb33970-835a-449b-a9c1-d7c1e9751977
+GET {{questionController}}/GetQuestionsOfRound/5079a946-9162-4fff-aa32-1a63f91db8a6
 
 ###
 
@@ -10,10 +10,9 @@ POST {{questionController}}/CreateQuestion
 Content-Type: application/json
 
 {
-    "questionNumber" : 2,
-    "fullScore" : 4,
-    "questionText" : "aaaaaaaaaaaaaaaaaaaaaaaa",
-    "roundId" : "9433625d-4eea-4b7d-bc05-52dbca2f272f"
+    "fullScore" : 2,
+    "questionText" : "asztamindenit",
+    "roundId" : "d6fb7e54-5ac2-4ff0-a33b-b2f1bea89a67"
 }
 
 ###
@@ -22,12 +21,11 @@ PATCH {{questionController}}/UpdateQuestion
 Content-Type: application/json
 
 {
-    "id" : "fac7c290-d489-4906-a0cd-9d9a8878e443",
-    "questionNumber" : 1,
-    "fullScore" : 3,
-    "questionText" : "WarmUpsssssss"
+    "id" : "3350b16b-5baf-4966-b470-1131e9dfc21d",
+    "fullScore" : 5,
+    "questionText" : "xxx"
 }
 
 ###
 
-DELETE {{questionController}}/DeleteQuestion/cbbaaabe-9010-4f24-943f-26b285a3b145
+DELETE {{questionController}}/DeleteQuestion/5013a4c1-5592-4419-b90c-51a30de4856b

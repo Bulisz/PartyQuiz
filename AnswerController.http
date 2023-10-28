@@ -1,8 +1,8 @@
-@answerController = https://localhost:5001/partyquiz/answer
+@answerController = https://localhost:5003/partyquiz/answer
 
 ###
 
-GET {{answerController}}/GetAnswersOfQuestion/1898ea2c-c6f9-47af-9e5d-6fe2f7a3064a
+GET {{answerController}}/GetAnswersOfQuestion/3350b16b-5baf-4966-b470-1131e9dfc21d
 
 ###
 
@@ -10,9 +10,10 @@ POST {{answerController}}/CreateAnswer
 Content-Type: application/json
 
 {
-    "answerText" : "sqsqq",
+    "roundId" : "d6fb7e54-5ac2-4ff0-a33b-b2f1bea89a67",
+    "answerText" : "bbbbbbb",
     "isCorrect" : false,
-    "questionId" : "fac7c290-d489-4906-a0cd-9d9a8878e443"
+    "questionId" : "646ed9eb-bfcd-477a-bb0b-9ce56279a6f4"
 }
 
 ###
@@ -21,11 +22,10 @@ PATCH {{answerController}}/UpdateAnswer
 Content-Type: application/json
 
 {
-    "id" : "2961bd89-46c9-4a29-bfb5-fcc46f81aaeb",
-    "answerText" : "eeeeeeeee  eeee  eeee",
-    "isCorrect" : true
+    "id" : "3c9158f9-0a21-4909-b993-c323a84811b5",
+    "answerText" : "sssseeee"
 }
 
 ###
 
-DELETE {{answerController}}/DeleteAnswer/cfb8c105-e1f6-432d-b952-2fb91d7033b5
+DELETE {{answerController}}/DeleteAnswer/17682034-0d30-46da-9e7b-a838b26cb038

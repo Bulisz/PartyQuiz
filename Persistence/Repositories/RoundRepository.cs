@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Persistence;
-using Domain.Entities;
+using Domain.Games;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.Base;
 
@@ -16,12 +16,12 @@ public class RoundRepository : GenericRepository<Round>, IRoundRepository
 
     public async Task<List<Round>> GetRoundsOfGameAsync(string gameId)
     {
-        var a = await _context.Rounds
+        var rounds = await _context.Rounds
             .Include(r => r.Questions)
             .ThenInclude(q => q.Answers)
             .Where(r => r.GameId == Guid.Parse(gameId))
             .ToListAsync();
 
-        return a;
+        return rounds;
     }
 }

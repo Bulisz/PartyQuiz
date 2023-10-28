@@ -1,6 +1,5 @@
 ﻿using Application.DTOs;
-using Domain.Entities;
-using Domain.Enums;
+using Domain.Games;
 
 namespace Application.MappingProfiles;
 
@@ -10,8 +9,8 @@ public static class RoundMappingProfile
         Round.Create(
             roundRequestDTO.RoundNumber,
             roundRequestDTO.RoundName,
-            Enum.Parse<RoundType>(roundRequestDTO.RoundType),
-            Guid.Parse(roundRequestDTO.GameId));
+            roundRequestDTO.RoundType,
+            Guid.Parse(roundRequestDTO.GameId)).Value;
 
     public static RoundResponseDTO ToRoundResponseDTO(this Round round)
     {
@@ -25,4 +24,11 @@ public static class RoundMappingProfile
             round.GameId.ToString(),
             questionList);
     }
+
+    public static Round ToRound(this RoundUpdateDTO roundUpdateDTO) =>
+        Round.Create(
+            roundUpdateDTO.RoundNumber,
+            roundUpdateDTO.RoundName,
+            roundUpdateDTO.RoundType,
+            Guid.Parse(roundUpdateDTO.GameId)).Value;
 }

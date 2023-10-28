@@ -21,8 +21,15 @@ public class AnswerController : ControllerBase
     [HttpGet("GetAnswersOfQuestion/{questionId}")]
     public async Task<ActionResult<IEnumerable<AnswerResponseDTO>>> GetAnswersOfQuestion(string questionId)
     {
-        var answers = await _mediator.Send(new GetAnswersOfQuestionQuery(questionId));
-        return Ok(answers);
+        try
+        {
+            var answers = await _mediator.Send(new GetAnswersOfQuestionQuery(questionId));
+            return Ok(answers);
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpPost(nameof(CreateAnswer))]

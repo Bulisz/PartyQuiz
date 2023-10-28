@@ -1,5 +1,5 @@
 ﻿using Application.DTOs;
-using Domain.Entities;
+using Domain.Games;
 
 namespace Application.MappingProfiles;
 
@@ -9,7 +9,7 @@ public static class AnswerMappingProfiles
         Answer.Create(
             answerRequestDTO.AnswerText,
             answerRequestDTO.IsCorrect,
-            Guid.Parse(answerRequestDTO.QuestionId));
+            Guid.Parse(answerRequestDTO.QuestionId)).Value;
 
     public static AnswerResponseDTO ToAnswerResponseDTO(this Answer answer) =>
         new (

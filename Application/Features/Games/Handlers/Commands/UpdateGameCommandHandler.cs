@@ -1,7 +1,10 @@
-﻿using Application.Contracts.Persistence.Base;
+﻿using Application.Contracts.Persistence;
+using Application.Contracts.Persistence.Base;
 using Application.Exceptions;
 using Application.Features.Games.Requests.Commands;
 using Application.Features.Games.Validators;
+using CSharpFunctionalExtensions;
+using Domain.Games;
 using MediatR;
 
 namespace Application.Features.Games.Handlers.Commands;
@@ -9,28 +12,32 @@ namespace Application.Features.Games.Handlers.Commands;
 public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand>
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IGameRepository _gameRepository;
 
-    public UpdateGameCommandHandler(IUnitOfWork unitOfWork)
+    public UpdateGameCommandHandler(IUnitOfWork unitOfWork, IGameRepository gameRepository)
     {
         _unitOfWork = unitOfWork;
+        _gameRepository = gameRepository;
     }
 
     public async Task Handle(UpdateGameCommand request, CancellationToken cancellationToken)
     {
-        var validator = new UpdateGameCommandValidator(_unitOfWork.GameRepository);
+        var validator = new UpdateGameCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
         if (!validationResult.IsValid)
             throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
 
-        var game = await _unitOfWork.GameRepository.Get(Guid.Parse(request.GameUpdateDTO.Id));
+        Maybe<Game?> gameNameExist = await _gameRepository.GetGameByNameAsync(request.GameUpdateDTO.GameName);
+        if (gameNameExist.HasValue)
+            throw new QuizValidationException("Some vaidation error occcurs", "gameName", "Game name already exist");
 
-        if (game is not null)
-        {
-            game.Modify(request.GameUpdateDTO.GameName);
+        Maybe<Game?> game = await _gameRepository.Get(Guid.Parse(request.GameUpdateDTO.Id));
+        if (game.HasNoValue)
+            throw new QuizValidationException("Some vaidation error occcurs", "gameId", "This game id does not exist");
 
-            _unitOfWork.GameRepository.Update(game);
-            await _unitOfWork.Save();
-        }
+        game.Value!.Modify(request.GameUpdateDTO.GameName);
+
+        _gameRepository.Update(game.Value!);
+        await _unitOfWork.Save();
     }
 }

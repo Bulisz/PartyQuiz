@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using CSharpFunctionalExtensions;
 using MediatR;
 
 namespace Application.Features.Games.Requests.Commands;

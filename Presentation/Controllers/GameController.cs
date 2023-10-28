@@ -4,6 +4,7 @@ using Application.Features.Games.Requests.Commands;
 using Application.Features.Games.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace Presentation.Controllers;
 
@@ -21,14 +22,21 @@ public class GameController : ControllerBase
     [HttpGet("GetGameByName/{gameName}")]
     public async Task<ActionResult<GameResponseDTO>> GetGameByName(string gameName)
     {
-        var game = await _mediator.Send(new GetGameByNameQuery(gameName));
-        return Ok(game);
+        try
+        {
+            var game = await _mediator.Send(new GetGameByNameQuery(gameName));
+            return Ok(game);
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpGet(nameof(GetAllGames))]
     public async Task<ActionResult<IEnumerable<GameResponseDTO>>> GetAllGames()
     {
-        var games = await _mediator.Send(new GetAllGamesQuery());
+        var games = await _mediator.Send(new GetAllGameNamesQuery());
         return Ok(games);
     }
 

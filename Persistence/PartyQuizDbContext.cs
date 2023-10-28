@@ -1,6 +1,7 @@
-﻿using Domain.Entities;
+﻿using Domain.Astractions;
+using Domain.Games;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence;
 
@@ -13,5 +14,10 @@ public class PartyQuizDbContext : DbContext
 
     public PartyQuizDbContext(DbContextOptions<PartyQuizDbContext> options) : base(options)
     {
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Ignore<DomainEvent>();
     }
 }

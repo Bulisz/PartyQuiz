@@ -2,22 +2,23 @@
 using Application.DTOs;
 using Application.Features.Games.Requests.Queries;
 using Application.MappingProfiles;
+using CSharpFunctionalExtensions;
 using MediatR;
 
 namespace Application.Features.Games.Handlers.Queries;
 
-public class GetAllGamesQueryHandler : IRequestHandler<GetAllGamesQuery, List<GameResponseDTO>>
+public class GetAllGameNamesQueryHandler : IRequestHandler<GetAllGameNamesQuery, List<GameResponseDTO>>
 {
     private readonly IGameRepository _repository;
 
-    public GetAllGamesQueryHandler(IGameRepository repository)
+    public GetAllGameNamesQueryHandler(IGameRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<List<GameResponseDTO>> Handle(GetAllGamesQuery request, CancellationToken cancellationToken)
+    public async Task<List<GameResponseDTO>> Handle(GetAllGameNamesQuery request, CancellationToken cancellationToken)
     {
-        var games = await _repository.GetAll();
+        var games = await _repository.GetAllGameNames();
 
         return games.Select(g => g.ToGameResponseDTO()).ToList()!;
     }

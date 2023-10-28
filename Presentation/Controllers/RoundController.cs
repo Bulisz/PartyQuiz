@@ -29,8 +29,15 @@ public class RoundController : ControllerBase
     [HttpGet("GetRoundsOfGame/{gameId}")]
     public async Task<ActionResult<IEnumerable<GameResponseDTO>>> GetRoundsOfGame(string gameId)
     {
-        var rounds = await _mediator.Send(new GetRoundsOfGameQuery(gameId));
-        return Ok(rounds);
+        try
+        {
+            var rounds = await _mediator.Send(new GetRoundsOfGameQuery(gameId));
+            return Ok(rounds);
+        }
+        catch (QuizValidationException e)
+        {
+            return BadRequest(new { errors = e.Errors });
+        }
     }
 
     [HttpPost(nameof(CreateRound))]

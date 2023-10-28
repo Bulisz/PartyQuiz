@@ -1,16 +1,16 @@
-﻿using Application.Contracts.Persistence;
-using Application.Features.Questions.Requests.Commands;
+﻿using Application.Features.Questions.Requests.Commands;
+using Application.Helpers;
 using FluentValidation;
 
 namespace Application.Features.Questions.Validators;
 
 public class UpdateQuestionCommandValidator : AbstractValidator<UpdateQuestionCommand>
 {
-    private readonly IQuestionRepository _questionRepository;
-
-    public UpdateQuestionCommandValidator(IQuestionRepository questionRepository)
+    public UpdateQuestionCommandValidator()
     {
-        _questionRepository = questionRepository;
+        RuleFor(uqc => uqc.QuestionUpdateDTO.Id)
+            .ValidGuid()
+            .OverridePropertyName("questionId");
 
         RuleFor(uqc => uqc.QuestionUpdateDTO.FullScore)
             .GreaterThan(0)
