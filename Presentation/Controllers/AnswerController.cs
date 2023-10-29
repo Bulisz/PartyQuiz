@@ -21,56 +21,28 @@ public class AnswerController : ControllerBase
     [HttpGet("GetAnswersOfQuestion/{questionId}")]
     public async Task<ActionResult<IEnumerable<AnswerResponseDTO>>> GetAnswersOfQuestion(string questionId)
     {
-        try
-        {
-            var answers = await _mediator.Send(new GetAnswersOfQuestionQuery(questionId));
-            return Ok(answers);
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        var answers = await _mediator.Send(new GetAnswersOfQuestionQuery(questionId));
+        return Ok(answers);
     }
 
     [HttpPost(nameof(CreateAnswer))]
     public async Task<ActionResult<AnswerResponseDTO>> CreateAnswer(AnswerRequestDTO answerRequestDTO)
     {
-        try
-        {
-            var answer = await _mediator.Send(new CreateAnswerCommand(answerRequestDTO));
-            return Ok(answer);
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        var answer = await _mediator.Send(new CreateAnswerCommand(answerRequestDTO));
+        return Ok(answer);
     }
 
     [HttpPatch(nameof(UpdateAnswer))]
     public async Task<IActionResult> UpdateAnswer(AnswerUpdateDTO answerUpdateDTO)
     {
-        try
-        {
-            await _mediator.Send(new UpdateAnswerCommand(answerUpdateDTO));
-            return Ok();
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        await _mediator.Send(new UpdateAnswerCommand(answerUpdateDTO));
+        return Ok();
     }
 
     [HttpDelete("DeleteAnswer/{answerId}")]
     public async Task<IActionResult> DeleteAnswer(string answerId)
     {
-        try
-        {
-            await _mediator.Send(new DeleteAnswerCommand(answerId));
-            return Ok();
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        await _mediator.Send(new DeleteAnswerCommand(answerId));
+        return Ok();
     }
 }

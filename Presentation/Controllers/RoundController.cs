@@ -1,5 +1,4 @@
 ﻿using Application.DTOs;
-using Application.Exceptions;
 using Application.Features.Rounds.Requests.Commands;
 using Application.Features.Rounds.Requests.Queries;
 using Domain.Enums;
@@ -29,56 +28,28 @@ public class RoundController : ControllerBase
     [HttpGet("GetRoundsOfGame/{gameId}")]
     public async Task<ActionResult<IEnumerable<GameResponseDTO>>> GetRoundsOfGame(string gameId)
     {
-        try
-        {
-            var rounds = await _mediator.Send(new GetRoundsOfGameQuery(gameId));
-            return Ok(rounds);
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        var rounds = await _mediator.Send(new GetRoundsOfGameQuery(gameId));
+        return Ok(rounds);
     }
 
     [HttpPost(nameof(CreateRound))]
     public async Task<ActionResult<RoundResponseDTO>> CreateRound(RoundRequestDTO roundRequestDTO)
     {
-        try
-        {
-            var round = await _mediator.Send(new CreateRoundCommand(roundRequestDTO));
-            return Ok(round);
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors});
-        }
+        var round = await _mediator.Send(new CreateRoundCommand(roundRequestDTO));
+        return Ok(round);
     }
 
     [HttpPatch(nameof(UpdateRound))]
     public async Task<IActionResult> UpdateRound(RoundUpdateDTO roundUpdateDTO)
     {
-        try
-        {
-            await _mediator.Send(new UpdateRoundCommand(roundUpdateDTO));
-            return Ok();
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        await _mediator.Send(new UpdateRoundCommand(roundUpdateDTO));
+        return Ok();
     }
 
     [HttpDelete("DeleteRound/{roundId}")]
     public async Task<IActionResult> DeleteRound(string roundId)
     {
-        try
-        {
-            await _mediator.Send(new DeleteRoundCommand(roundId));
-            return Ok();
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        await _mediator.Send(new DeleteRoundCommand(roundId));
+        return Ok();
     }
 }

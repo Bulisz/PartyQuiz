@@ -1,10 +1,8 @@
 ﻿using Application.DTOs;
-using Application.Exceptions;
 using Application.Features.Games.Requests.Commands;
 using Application.Features.Games.Requests.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Presentation.Controllers;
 
@@ -22,15 +20,8 @@ public class GameController : ControllerBase
     [HttpGet("GetGameByName/{gameName}")]
     public async Task<ActionResult<GameResponseDTO>> GetGameByName(string gameName)
     {
-        try
-        {
-            var game = await _mediator.Send(new GetGameByNameQuery(gameName));
-            return Ok(game);
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        var game = await _mediator.Send(new GetGameByNameQuery(gameName));
+        return Ok(game);
     }
 
     [HttpGet(nameof(GetAllGames))]
@@ -43,42 +34,21 @@ public class GameController : ControllerBase
     [HttpPost(nameof(CreateGame))]
     public async Task<ActionResult<GameResponseDTO>> CreateGame(GameRequestDTO gameRequestDTO)
     {
-        try
-        {
-            var game = await _mediator.Send(new CreateGameCommand(gameRequestDTO));
-            return Ok(game);
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        var game = await _mediator.Send(new CreateGameCommand(gameRequestDTO));
+        return Ok(game);
     }
 
     [HttpPatch(nameof(UpdateGame))]
     public async Task<IActionResult> UpdateGame(GameUpdateDTO gameUpdateDTO)
     {
-        try
-        {
-            await _mediator.Send(new UpdateGameCommand(gameUpdateDTO));
-            return Ok();
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors });
-        }
+        await _mediator.Send(new UpdateGameCommand(gameUpdateDTO));
+        return Ok();
     }
 
     [HttpDelete("DeleteGame/{gameId}")]
     public async Task<IActionResult> DeleteGame(string gameId)
     {
-        try
-        {
-            await _mediator.Send(new DeleteGameCommand(gameId));
-            return Ok();
-        }
-        catch (QuizValidationException e)
-        {
-            return BadRequest(new { errors = e.Errors});
-        }
+        await _mediator.Send(new DeleteGameCommand(gameId));
+        return Ok();
     }
 }

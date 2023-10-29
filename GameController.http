@@ -6,7 +6,7 @@ GET {{gameController}}/GetAllGames
 
 ###
 
-GET {{gameController}}/GetGameByName/Avengers
+GET {{gameController}}/GetGameByName/Avenger
 
 ###
 
