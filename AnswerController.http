@@ -7,7 +7,7 @@ GET {{answerController}}/GetAnswersOfQuestion/3350b16b-5baf-4966-b470-1131e9dfc2
 ###
 
 POST {{answerController}}/CreateAnswer
-Content-Type: application/json
+Content-Type: application/json;  charset=utf-8
 
 {
     "roundId" : "d6fb7e54-5ac2-4ff0-a33b-b2f1bea89a67",
@@ -19,7 +19,7 @@ Content-Type: application/json
 ###
 
 PATCH {{answerController}}/UpdateAnswer
-Content-Type: application/json
+Content-Type: application/json;  charset=utf-8
 
 {
     "id" : "3c9158f9-0a21-4909-b993-c323a84811b5",

@@ -24,14 +24,17 @@ public class GlobalExceptionHandlingMiddleware : IMiddleware
         {
             _logger.LogError(ex, ex.Message);
 
+            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
             string json = JsonSerializer.Serialize(new { errors = ex.Errors });
 
-            context.Response.ContentType = "application/json";
+            context.Response.ContentType = "application/json; charset=utf-8";
             await context.Response.WriteAsync(json);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, ex.Message);
+
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
             var problem = new ProblemDetails()
             {
                 Status = (int)HttpStatusCode.InternalServerError,
@@ -39,18 +42,10 @@ public class GlobalExceptionHandlingMiddleware : IMiddleware
                 Type = "Server error",
                 Detail = ex.Message
             };
+            string json = JsonSerializer.Serialize(problem);
 
-            await RespondError(context, problem);
+            context.Response.ContentType = "application/json; charset=utf-8";
+            await context.Response.WriteAsync(json);
         }
-    }
-
-    private static async Task RespondError(HttpContext context, ProblemDetails problem)
-    {
-        context.Response.StatusCode = problem.Status ?? (int)HttpStatusCode.InternalServerError;
-
-        string json = JsonSerializer.Serialize(problem);
-
-        context.Response.ContentType = "application/json";
-        await context.Response.WriteAsync(json);
     }
 }

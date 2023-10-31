@@ -7,7 +7,7 @@ GET {{questionController}}/GetQuestionsOfRound/5079a946-9162-4fff-aa32-1a63f91db
 ###
 
 POST {{questionController}}/CreateQuestion
-Content-Type: application/json
+Content-Type: application/json;  charset=utf-8
 
 {
     "fullScore" : 2,
@@ -18,7 +18,7 @@ Content-Type: application/json
 ###
 
 PATCH {{questionController}}/UpdateQuestion
-Content-Type: application/json
+Content-Type: application/json;  charset=utf-8
 
 {
     "id" : "3350b16b-5baf-4966-b470-1131e9dfc21d",

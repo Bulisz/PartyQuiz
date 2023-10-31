@@ -11,7 +11,7 @@ GET {{roundController}}/GetRoundsOfGame/45858ae2-cf01-4d02-a4d0-ec0cc4c88d24
 ###
 
 POST {{roundController}}/CreateRound
-Content-Type: application/json
+Content-Type: application/json;  charset=utf-8
 
 {
     "roundNumber" : 1,
@@ -23,7 +23,7 @@ Content-Type: application/json
 ###
 
 PATCH {{roundController}}/UpdateRound
-Content-Type: application/json
+Content-Type: application/json;  charset=utf-8
 
 {
     "id" : "60da77aa-bac3-455c-b064-4ff07623ab7c",
