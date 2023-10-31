@@ -33,15 +33,15 @@ jobs:
       if: always()
       with:
         xunit_files: "/home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.xml"
-    - name: Create Test Coverage Badge
-      uses: simon-k/dotnet-code-coverage-badge@v1.0.0
-      id: create_coverage_badge
-      with:
-        label: Unit Test Coverage
-        color: brightgreen
-        path: /home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.xml
-        gist-filename: partyquiz-code-coverage.json
-        gist-id: 1e55bf51b3cc710e6046e10a501cca74
-        gist-auth-token: ${{ secrets.PARTY_QUIZ_CODE_COVERAGE_GIST_TOKEN }}
-    - name: Print code coverage
-      run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
+    # - name: Create Test Coverage Badge
+    #   uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+    #   id: create_coverage_badge
+    #   with:
+    #     label: Unit Test Coverage
+    #     color: brightgreen
+    #     path: /home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.xml
+    #     gist-filename: partyquiz-code-coverage.json
+    #     gist-id: 1e55bf51b3cc710e6046e10a501cca74
+    #     gist-auth-token: ${{ secrets.PARTY_QUIZ_CODE_COVERAGE_GIST_TOKEN }}
+    # - name: Print code coverage
+    #   run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
