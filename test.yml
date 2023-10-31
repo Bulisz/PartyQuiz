@@ -1,0 +1,47 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - test
+
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./PartyQuiz.sln
+    - name: Build
+      run: dotnet build ./PartyQuiz.sln --no-restore
+    - name: Test
+      run: dotnet test  -p:CollectCoverage=true -p:CoverletOutput=TestResults/ -p:CoverletOutputFormat=opencover ./ArchitectureTest/ArchitectureTest.csproj --no-build --verbosity normal --logger:"xunit;LogFilePath=/home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.xml"
+    - name: Test Report
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        xunit_files: "/home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.xml"
+    - name: Create Test Coverage Badge
+      uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+      id: create_coverage_badge
+      with:
+        label: Unit Test Coverage
+        color: brightgreen
+        path: /home/runner/work/PartyQuiz/PartyaQuiz/ArchitectureTest/TestResults/coverage.opencover.xml
+        gist-filename: code-coverage.json
+        gist-id: 6d8144222a6a47f7a7d26b0c8804b6fc
+        gist-auth-token: ${{ secrets.PARTY_QUIZ_CODE_COVERAGE_GIST_TOKEN }}
+    - name: Print code coverage
+      run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
