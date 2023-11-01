@@ -27,7 +27,7 @@ jobs:
     - name: Build
       run: dotnet build ./PartyQuiz.sln --no-restore
     - name: Test
-      run: dotnet test ./ArchitectureTest/ArchitectureTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.trx"
+      run: dotnet test ./ArchitectureTest/ArchitectureTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/ArchitectureTest.trx"
     # - name: Test Report
     #   uses: EnricoMi/publish-unit-test-result-action@v2
     #   if: always()
@@ -38,5 +38,5 @@ jobs:
       if: success() || failure()    # run this step even if previous step failed
       with:
         name: JEST Tests            # Name of the check run which will be created
-        path: /home/runner/work/PartyQuiz/PartyQuiz/ArchitectureTest/TestResults/test_results.trx    # Path to test results
+        path: /home/runner/work/PartyQuiz/PartyQuiz/TestResults/*.trx    # Path to test results
         reporter: dotnet-trx        # Format of test results
