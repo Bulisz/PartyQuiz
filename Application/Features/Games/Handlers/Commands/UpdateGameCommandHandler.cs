@@ -25,15 +25,15 @@ public class UpdateGameCommandHandler : IRequestHandler<UpdateGameCommand>
         var validator = new UpdateGameCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Game?> gameNameExist = await _gameRepository.GetGameByNameAsync(request.GameUpdateDTO.GameName);
         if (gameNameExist.HasValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "gameName", "Game name already exist");
+            throw new QuizValidationException("Some validation error occurs", "gameName", "Game name already exist");
 
         Maybe<Game?> game = await _gameRepository.Get(Guid.Parse(request.GameUpdateDTO.Id));
         if (game.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "gameId", "This game id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "gameId", "This game id does not exist");
 
         game.Value!.Modify(request.GameUpdateDTO.GameName);
 

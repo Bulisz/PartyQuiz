@@ -4,7 +4,6 @@ using Application.DTOs;
 using Application.Exceptions;
 using Application.Features.Games.Handlers.Commands;
 using Application.Features.Games.Requests.Commands;
-using CSharpFunctionalExtensions;
 using Domain.Games;
 using FluentAssertions;
 using NSubstitute;
@@ -15,6 +14,12 @@ public class CreateGameCommandHandlerTests
 {
     private readonly IGameRepository _gameRepository = Substitute.For<IGameRepository>();
     private readonly IUnitOfWork _unitOfWork = Substitute.For<IUnitOfWork>();
+    private readonly CreateGameCommandHandler _handler;
+
+    public CreateGameCommandHandlerTests()
+    {
+        _handler = new CreateGameCommandHandler(_unitOfWork, _gameRepository);
+    }
 
     [Fact]
     public async Task CreateGameCommandHandler_ShouldFailure_WhenGameNameIsEmpty()
@@ -22,10 +27,9 @@ public class CreateGameCommandHandlerTests
         //Arrange
         var dto = new GameRequestDTO("");
         var command = new CreateGameCommand(dto);
-        var handler = new CreateGameCommandHandler(_unitOfWork,_gameRepository);
 
         //Act
-        var result = () => handler.Handle(command, default);
+        var result = () => _handler.Handle(command, default);
 
         //Assert
         var exception = await result.Should().ThrowAsync<QuizValidationException>().WithMessage("Some validation error occurs");
@@ -39,12 +43,11 @@ public class CreateGameCommandHandlerTests
         //Arrange
         var dto = new GameRequestDTO("Exists");
         var command = new CreateGameCommand(dto);
-        var handler = new CreateGameCommandHandler(_unitOfWork, _gameRepository);
         var game = Game.Create("Exists").Value;
         _gameRepository.GetGameByNameAsync(Arg.Any<string>()).Returns(Task.FromResult<Game?>(game));
 
         //Act
-        var result = () => handler.Handle(command, default);
+        var result = () => _handler.Handle(command, default);
 
         //Assert
         var exception = await result.Should().ThrowAsync<QuizValidationException>().WithMessage("Some validation error occurs");
@@ -59,11 +62,10 @@ public class CreateGameCommandHandlerTests
         //Arrange
         var dto = new GameRequestDTO("Exists");
         var command = new CreateGameCommand(dto);
-        var handler = new CreateGameCommandHandler(_unitOfWork, _gameRepository);
         _gameRepository.GetGameByNameAsync(Arg.Any<string>()).Returns(Task.FromResult<Game?>(null));
 
         //Act
-        var result = await handler.Handle(command, default);
+        var result = await _handler.Handle(command, default);
 
         //Assert
         result.Should().BeOfType<GameResponseDTO>();
@@ -76,12 +78,10 @@ public class CreateGameCommandHandlerTests
         //Arrange
         var dto = new GameRequestDTO("Exists");
         var command = new CreateGameCommand(dto);
-        var handler = new CreateGameCommandHandler(_unitOfWork, _gameRepository);
         _gameRepository.GetGameByNameAsync(Arg.Any<string>()).Returns(Task.FromResult<Game?>(null));
-        await _gameRepository.Add(Arg.Any<Game>());
 
         //Act
-        await handler.Handle(command, default);
+        await _handler.Handle(command, default);
 
         //Assert
         await _gameRepository.Received(1).GetGameByNameAsync("Exists");
@@ -95,13 +95,11 @@ public class CreateGameCommandHandlerTests
         //Arrange
         var dto = new GameRequestDTO("Exists");
         var command = new CreateGameCommand(dto);
-        var handler = new CreateGameCommandHandler(_unitOfWork, _gameRepository);
         var game = Game.Create("Exists").Value;
         _gameRepository.GetGameByNameAsync(Arg.Any<string>()).Returns(Task.FromResult<Game?>(game));
-        await _gameRepository.Add(Arg.Any<Game>());
 
         //Act
-        var result = async () => await handler.Handle(command, default);
+        var result = async () => await _handler.Handle(command, default);
 
         //Assert
         await _gameRepository.DidNotReceiveWithAnyArgs().Add(Arg.Any<Game>());

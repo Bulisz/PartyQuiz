@@ -25,7 +25,7 @@ public class DeleteGameCommandHandler : IRequestHandler<DeleteGameCommand>
         var validator = new DeleteGameCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Game?> game = await _gameRepository.Get(Guid.Parse(request.GameId));
         if (game.HasNoValue)
