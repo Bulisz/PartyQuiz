@@ -4,7 +4,6 @@ using Application.DTOs;
 using Application.Exceptions;
 using Application.Features.Questions.Requests.Commands;
 using Application.Features.Questions.Validators;
-using Application.Features.Rounds.Validators;
 using Application.MappingProfiles;
 using CSharpFunctionalExtensions;
 using Domain.Games;
@@ -30,11 +29,11 @@ public class CreateQuestionCommandHandler : IRequestHandler<CreateQuestionComman
         var validator = new CreateQuestionCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Round?> round = await _roundRepository.Get(Guid.Parse(request.QuestionRequestDTO.RoundId));
         if (round.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "roundId", "Round does not exist");
+            throw new QuizValidationException("Some validation error occurs", "roundId", "Round does not exist");
 
         var questionsOfRound = await _questionRepository.GetQuestionsOfRoundAsync(request.QuestionRequestDTO.RoundId);
 

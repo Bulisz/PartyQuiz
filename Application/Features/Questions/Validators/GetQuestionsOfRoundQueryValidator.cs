@@ -10,6 +10,6 @@ public class GetQuestionsOfRoundQueryValidator : AbstractValidator<GetQuestionsO
     {
         RuleFor(gqor => gqor.RoundId)
             .ValidGuid()
-            .OverridePropertyName("gameId");
+            .OverridePropertyName("roundId");
     }
 }

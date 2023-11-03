@@ -63,8 +63,8 @@ public class GetRoundsOfGameQueryHandlerTests
         var game = Game.Create(guid.ToString()).Value;
         var roundToModify = Round.Create(1, "RoundName", "ABCD", guid).Value;
         var anotherRound = Round.Create(2, "RoundName2", "Nullable", guid).Value;
-        game.TryToAddRound(anotherRound);
         game.TryToAddRound(roundToModify);
+        game.TryToAddRound(anotherRound);
         _gameRepository.Get(Arg.Any<Guid>())!.Returns(Task.FromResult(game));
         var rounds = game.Rounds.ToList();
         _roundRepository.GetRoundsOfGameAsync(Arg.Any<string>()).Returns(Task.FromResult(rounds));
@@ -74,5 +74,7 @@ public class GetRoundsOfGameQueryHandlerTests
 
         //Assert
         result.GetType().Should().Be(typeof(List<RoundResponseDTO>));
+        result[0].RoundNumber.Should().Be(1);
+        result[1].RoundName.Should().Be("RoundName2");
     }
 }
