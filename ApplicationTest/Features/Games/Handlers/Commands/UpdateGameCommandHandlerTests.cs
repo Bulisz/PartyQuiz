@@ -23,7 +23,7 @@ public class UpdateGameCommandHandlerTests
     }
 
     [Fact]
-    public async Task CreateGameCommandHandler_ShouldFailure_WhenGameNameIsEmpty()
+    public async Task UpdateGameCommandHandler_ShouldFailure_WhenGameNameIsEmpty()
     {
         //Arrange
         var guid = Guid.NewGuid();
@@ -40,7 +40,7 @@ public class UpdateGameCommandHandlerTests
     }
 
     [Fact]
-    public async Task CreateGameCommandHandler_ShouldFailure_WhenGameIdIsNotValid()
+    public async Task UpdateGameCommandHandler_ShouldFailure_WhenGameIdIsNotValid()
     {
         //Arrange
         var dto = new GameUpdateDTO("a", "GameName");
@@ -57,7 +57,7 @@ public class UpdateGameCommandHandlerTests
     }
 
     [Fact]
-    public async Task CreateGameCommandHandler_ShouldFailure_WhenGameNameAlreadyExist()
+    public async Task UpdateGameCommandHandler_ShouldFailure_WhenGameNameAlreadyExist()
     {
         //Arrange
         var guid = Guid.NewGuid();
@@ -78,7 +78,7 @@ public class UpdateGameCommandHandlerTests
     }
 
     [Fact]
-    public async Task CreateGameCommandHandler_ShouldFailure_WhenGameDoesNotExist()
+    public async Task UpdateGameCommandHandler_ShouldFailure_WhenGameDoesNotExist()
     {
         //Arrange
         var guid = Guid.NewGuid();
@@ -98,7 +98,7 @@ public class UpdateGameCommandHandlerTests
     }
 
     [Fact]
-    public async Task CreateGameCommandHandler_ShouldCall_RepositoryMethodsProperly()
+    public async Task UpdateGameCommandHandler_ShouldCall_RepositoryMethodsProperly()
     {
         //Arrange
         var guid = Guid.NewGuid();
@@ -117,7 +117,7 @@ public class UpdateGameCommandHandlerTests
     }
 
     [Fact]
-    public async Task CreateGameCommandHandler_ShouldNotCall_RepositoryMethodsProperly()
+    public async Task UpdateGameCommandHandler_ShouldNotCall_RepositoryMethodsProperly()
     {
         //Arrange
         var dto = new GameUpdateDTO("a", "");

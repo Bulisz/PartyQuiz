@@ -27,17 +27,17 @@ public class CreateRoundCommandHandler : IRequestHandler<CreateRoundCommand, Rou
         var validator = new CreateRoundCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Game?> game = await _gameRepository.Get(Guid.Parse(request.RoundRequestDTO.GameId));
         if (game.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "gameId", "Game id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "gameId", "Game id does not exist");
 
         var round = request.RoundRequestDTO.ToRound();
 
         var addRoundResult = game.Value!.TryToAddRound(round);
         if (addRoundResult.IsFailure)
-            throw new QuizValidationException("Some vaidation error occcurs", "round", addRoundResult.Error);
+            throw new QuizValidationException("Some validation error occurs", "round", addRoundResult.Error);
 
         _gameRepository.Update(game.Value);
         await _unitOfWork.Save();

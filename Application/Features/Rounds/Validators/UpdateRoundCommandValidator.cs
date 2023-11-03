@@ -17,8 +17,8 @@ public class UpdateRoundCommandValidator : AbstractValidator<UpdateRoundCommand>
             .OverridePropertyName("gameId");
 
         RuleFor(urc => urc.RoundUpdateDTO.RoundNumber)
-            .GreaterThan(0).WithMessage("A kör száma legyen nagyobb mint 0")
-            .LessThanOrEqualTo(10).WithMessage("A maximum kör szám 10")
+            .GreaterThan(0)
+            .LessThanOrEqualTo(10)
             .OverridePropertyName("roundNumber");
 
         RuleFor(crc => crc.RoundUpdateDTO.RoundName)
