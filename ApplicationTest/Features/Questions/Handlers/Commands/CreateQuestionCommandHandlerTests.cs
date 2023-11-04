@@ -8,7 +8,7 @@ using Domain.Games;
 using FluentAssertions;
 using NSubstitute;
 
-namespace ApplicationTest.Features.Questions.Commands;
+namespace ApplicationTest.Features.Questions.Handlers.Commands;
 
 public class CreateQuestionCommandHandlerTests
 {

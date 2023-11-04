@@ -8,7 +8,7 @@ using Domain.Games;
 using FluentAssertions;
 using NSubstitute;
 
-namespace ApplicationTest.Features.Questions.Queries;
+namespace ApplicationTest.Features.Questions.Handlers.Queries;
 
 public class GetQuestionsOfRoundQueryHandlerTest
 {
