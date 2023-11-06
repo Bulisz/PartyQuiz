@@ -5,11 +5,11 @@ using Persistence.Repositories;
 
 namespace PersistenceTest.Repositories;
 
-public class GameRepositoryTest
+public class GameRepositoryTests
 {
     private readonly PartyQuizDbContext _context;
     private readonly GameRepository _repository;
-    public GameRepositoryTest()
+    public GameRepositoryTests()
     {
         _context = ContextGenerator.Generate();
         _repository = new GameRepository(_context);
@@ -22,6 +22,17 @@ public class GameRepositoryTest
         var game = Game.Create("NewGame").Value;
         _context.Games.Add(game);
         await _context.SaveChangesAsync();
+        var round = Round.Create(1, "RoundName", "ABCD", game.Id).Value;
+        game.TryToAddRound(round);
+        _context.Games.Update(game);
+        await _context.SaveChangesAsync();
+        var question = Question.Create(1, 1, "QestionText",round.Id).Value;
+        _context.Questions.Add(question);
+        await _context.SaveChangesAsync();
+        var answer = Answer.Create("AnswerText", true, question.Id).Value;
+        _context.Answers.Add(answer);
+        await _context.SaveChangesAsync();
+        
 
         //Act
         var result = await _repository.Get(game.Id);
@@ -29,6 +40,9 @@ public class GameRepositoryTest
         //Assert
         result!.GameName.Should().Be("NewGame");
         result.Id.Should().Be(game.Id);
+        result.Rounds.Should().HaveCount(1);
+        result.Rounds.ToList()[0].Questions.Should().HaveCount(1);
+        result.Rounds.ToList()[0].Questions.ToList()[0].Answers.Should().HaveCount(1);
     }
 
     [Fact]
@@ -139,11 +153,25 @@ public class GameRepositoryTest
         var game = Game.Create("NewGame").Value;
         _context.Games.Add(game);
         await _context.SaveChangesAsync();
+        var round = Round.Create(1, "RoundName", "ABCD", game.Id).Value;
+        game.TryToAddRound(round);
+        _context.Games.Update(game);
+        await _context.SaveChangesAsync();
+        var question = Question.Create(1, 1, "QestionText", round.Id).Value;
+        _context.Questions.Add(question);
+        await _context.SaveChangesAsync();
+        var answer = Answer.Create("AnswerText", true, question.Id).Value;
+        _context.Answers.Add(answer);
+        await _context.SaveChangesAsync();
 
         //Act
         var result = await _repository.GetGameByNameAsync("NewGame");
 
         //Assert
         result!.GameName.Should().Be("NewGame");
+        result.Id.Should().Be(game.Id);
+        result.Rounds.ToList().Should().HaveCount(1);
+        result.Rounds.ToList()[0].Questions.Should().HaveCount(1);
+        result.Rounds.ToList()[0].Questions.ToList()[0].Answers.Should().HaveCount(1);
     }
 }
