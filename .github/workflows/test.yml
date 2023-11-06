@@ -35,7 +35,7 @@ jobs:
     - name: PersistenceTest
       run: dotnet test ./PersistenceTest/PersistenceTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/PersistenceTest.trx"
     - name: IntegrationTest
-      run: dotnet test ./PersistenceTest/IntegrationTests.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/IntegrationTests.trx"
+      run: dotnet test ./IntegrationTests/IntegrationTests.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/IntegrationTests.trx"
     - name: Test Report
       uses: dorny/test-reporter@v1
       if: success() || failure()
