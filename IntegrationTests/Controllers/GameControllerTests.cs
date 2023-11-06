@@ -6,7 +6,7 @@ using NSubstitute;
 using System.Net;
 using System.Net.Http.Json;
 
-namespace IntegrationTests;
+namespace IntegrationTests.Controllers;
 
 public class GameControllerTests : IDisposable
 {
@@ -83,11 +83,11 @@ public class GameControllerTests : IDisposable
     public async Task UpdateGameTest()
     {
         //Arrange
-        var gameToCreate = new GameUpdateDTO(Guid.Empty.ToString(), "NewName");
+        var gameToUpdate = new GameUpdateDTO(Guid.Empty.ToString(), "NewName");
         _factory.GameRepository.Get(Arg.Any<Guid>()).Returns(Game.Create("OldName").Value);
 
         //Act
-        var response = await _client.PatchAsync("/partyquiz/game/UpdateGame", JsonContent.Create(gameToCreate));
+        var response = await _client.PatchAsync("/partyquiz/game/UpdateGame", JsonContent.Create(gameToUpdate));
 
         //Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
