@@ -26,7 +26,7 @@ public class RoundController : ControllerBase
     }
 
     [HttpGet("GetRoundsOfGame/{gameId}")]
-    public async Task<ActionResult<IEnumerable<GameResponseDTO>>> GetRoundsOfGame(string gameId)
+    public async Task<ActionResult<IEnumerable<RoundResponseDTO>>> GetRoundsOfGame(string gameId)
     {
         var rounds = await _mediator.Send(new GetRoundsOfGameQuery(gameId));
         return Ok(rounds);

@@ -1,0 +1,45 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - test
+
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 7.0.x
+    - name: Restore dependencies
+      run: dotnet restore ./PartyQuiz.sln
+    - name: Build
+      run: dotnet build ./PartyQuiz.sln --no-restore
+    - name: ArchitectureTest
+      run: dotnet test ./ArchitectureTest/ArchitectureTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/ArchitectureTest.trx"
+    - name: ApplicationTest
+      run: dotnet test ./ApplicationTest/ApplicationTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/ApplicationTest.trx"
+    - name: PresentationTest
+      run: dotnet test ./PresentationTest/PresentationTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/PresentationTest.trx"
+    - name: PersistenceTest
+      run: dotnet test ./PersistenceTest/PersistenceTest.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/PersistenceTest.trx"
+    - name: IntegrationTest
+      run: dotnet test ./IntegrationTests/IntegrationTests.csproj --no-build --verbosity normal --logger:"trx;LogFileName=/home/runner/work/PartyQuiz/PartyQuiz/TestResults/IntegrationTests.trx"
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()
+      with:
+        name: xUnit Tests
+        path: /home/runner/work/PartyQuiz/PartyQuiz/TestResults/*.trx
+        reporter: dotnet-trx

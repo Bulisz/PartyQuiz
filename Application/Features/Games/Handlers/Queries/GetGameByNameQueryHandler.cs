@@ -22,7 +22,7 @@ public class GetGameByNameQueryHandler : IRequestHandler<GetGameByNameQuery, Gam
     {
         Maybe<Game?> game = await _repository.GetGameByNameAsync(request.GameName);
         if (game.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "gameName", "Game name does not exist");
+            throw new QuizValidationException("Some validation error occurs", "gameName", "Game name does not exist");
 
         return game.Value.ToGameResponseDTO()!;
     }

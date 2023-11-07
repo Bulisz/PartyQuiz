@@ -26,11 +26,11 @@ public class GetRoundsOfGameQueryHandler : IRequestHandler<GetRoundsOfGameQuery,
         var validator = new GetRoundsOfGameQueryValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Game?> game = await _gameRepository.Get(Guid.Parse(request.GameId));
         if (game.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "gameId", "Game does not exist");
+            throw new QuizValidationException("Some validation error occurs", "gameId", "Game does not exist");
 
         var rounds = await _roundRepository.GetRoundsOfGameAsync(request.GameId);
 

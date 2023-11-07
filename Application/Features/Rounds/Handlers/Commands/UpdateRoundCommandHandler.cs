@@ -26,22 +26,22 @@ public class UpdateRoundCommandHandler : IRequestHandler<UpdateRoundCommand>
         var validator = new UpdateRoundCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Game?> game = await _gameRepository.Get(Guid.Parse(request.RoundUpdateDTO.GameId));
         if (game.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "gameId", "Game id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "gameId", "Game id does not exist");
 
         Maybe<Round?> roundExist = game.Value!.Rounds.FirstOrDefault(r => r.Id == Guid.Parse(request.RoundUpdateDTO.Id));
         if (roundExist.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "roundId", "Round id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "roundId", "Round id does not exist");
 
         var roundToModify = request.RoundUpdateDTO.ToRound();
         roundToModify.Modify(Guid.Parse(request.RoundUpdateDTO.Id));
 
         var roundModifyResult = game.Value.TryToModifyRoundOfGame(roundToModify);
         if (roundModifyResult.IsFailure)
-            throw new QuizValidationException("Some vaidation error occcurs", roundModifyResult.GetType().ToString(), roundModifyResult.Error);
+            throw new QuizValidationException("Some validation error occurs", "round", roundModifyResult.Error);
 
         _gameRepository.Update(game.Value);
         await _unitOfWork.Save();

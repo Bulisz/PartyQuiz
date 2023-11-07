@@ -26,11 +26,11 @@ public class GetAnswersOfQuestionQueryHandler : IRequestHandler<GetAnswersOfQues
         var validator = new GetAnswersOfQuestionQueryValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Question?> question = await _questionRepository.Get(Guid.Parse(request.QuestionId));
         if (question.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "questionId", "Question does not exist");
+            throw new QuizValidationException("Some validation error occurs", "questionId", "Question does not exist");
 
         var answers = await _answerRepository.GetAnswersOfQuestionAsync(request.QuestionId);
 

@@ -25,11 +25,11 @@ public class DeleteAnswerCommandHandler : IRequestHandler<DeleteAnswerCommand>
         var validator = new DeleteAnswerCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Answer?> answer = await _answerRepository.Get(Guid.Parse(request.AnswerId));
         if (answer.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "answerId", "Answer Id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "answerId", "Answer Id does not exist");
 
         _answerRepository.Delete(answer.Value!);
         await _unitOfWork.Save();

@@ -27,7 +27,7 @@ public class CreateGameCommandHandler : IRequestHandler<CreateGameCommand, GameR
         var validator = new CreateGameCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Game?> gameNameExists = await _gameRepository.GetGameByNameAsync(request.GameRequestDTO.GameName);
         if (gameNameExists.HasValue)

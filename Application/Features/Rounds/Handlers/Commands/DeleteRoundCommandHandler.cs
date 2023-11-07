@@ -24,13 +24,12 @@ public class DeleteRoundCommandHandler : IRequestHandler<DeleteRoundCommand>
     {
         var validator = new DeleteRoundCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Round?> round = await _roundRepository.Get(Guid.Parse(request.RoundId));
         if (round.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "roundId", "Round Id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "roundId", "Round Id does not exist");
 
         _roundRepository.Delete(round.Value!);
         await _unitOfWork.Save();

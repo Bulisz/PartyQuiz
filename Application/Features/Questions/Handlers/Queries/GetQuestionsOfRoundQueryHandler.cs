@@ -26,11 +26,11 @@ public class GetQuestionsOfRoundQueryHandler : IRequestHandler<GetQuestionsOfRou
         var validator = new GetQuestionsOfRoundQueryValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Round?> round = await _roundRepository.Get(Guid.Parse(request.RoundId));
         if (round.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "roundId", "Round does not exist");
+            throw new QuizValidationException("Some validation error occurs", "roundId", "Round does not exist");
 
         var questions = await _questionRepository.GetQuestionsOfRoundAsync(request.RoundId);
 

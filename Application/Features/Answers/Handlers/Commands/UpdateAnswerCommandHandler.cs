@@ -26,11 +26,11 @@ public class UpdateAnswerCommandHandler : IRequestHandler<UpdateAnswerCommand>
         var validator = new UpdateAnswerCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Answer?> answer = await _answerRepository.Get(Guid.Parse(request.AnswerUpdateDTO.Id));
         if (answer.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "answerId", "Answer id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "answerId", "Answer id does not exist");
 
         _ = answer.Value!.Modify(request.AnswerUpdateDTO.AnswerText);
 

@@ -29,21 +29,21 @@ public class CreateAnswerCommandHandler : IRequestHandler<CreateAnswerCommand, A
         var validator = new CreateAnswerCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Question?> question = await _questionRepository.Get(Guid.Parse(request.AnswerRequestDTO.QuestionId));
         if (question.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "questionId", "Question id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "questionId", "Question id does not exist");
 
         Maybe<Round?> round = await _roundRepository.Get(Guid.Parse(request.AnswerRequestDTO.RoundId));
         if (round.HasNoValue)
-            throw new QuizValidationException("Some vaidation error occcurs", "roundId", "Round id does not exist");
+            throw new QuizValidationException("Some validation error occurs", "roundId", "Round id does not exist");
 
         var answer = request.AnswerRequestDTO.ToAnswer();
 
         var addQuestionResult = question.Value!.TryToAddAnswer(answer, round.Value!.RoundType);
         if (addQuestionResult.IsFailure)
-            throw new QuizValidationException("Some vaidation error occcurs", "isCorrect", addQuestionResult.Error);
+            throw new QuizValidationException("Some validation error occurs", "answer", addQuestionResult.Error);
 
         _questionRepository.Update(question.Value);
         await _unitOfWork.Save();

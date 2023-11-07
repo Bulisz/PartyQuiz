@@ -24,9 +24,8 @@ public class UpdateQuestionCommandHandler : IRequestHandler<UpdateQuestionComman
     {
         var validator = new UpdateQuestionCommandValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
-
         if (!validationResult.IsValid)
-            throw new QuizValidationException("Some vaidation error occcurs", validationResult.Errors);
+            throw new QuizValidationException("Some validation error occurs", validationResult.Errors);
 
         Maybe<Question?> question = await _questionRepository.Get(Guid.Parse(request.QuestionUpdateDTO.Id));
         if (question.HasNoValue)

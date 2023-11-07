@@ -29,4 +29,4 @@ Content-Type: application/json; charset=utf-8
 
 ###
 
-DELETE {{gameController}}/DeleteGame/f0e129d4-31a5-40fd-842a-fb143871497
+DELETE {{gameController}}/DeleteGame/f0e129d4-31a5-40fd-842a-fb1438714977

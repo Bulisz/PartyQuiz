@@ -1,5 +1,4 @@
-﻿using Application.Contracts.Persistence;
-using Application.Contracts.Persistence.Base;
+﻿using Application.Contracts.Persistence.Base;
 
 namespace Persistence.Repositories.Base;
 
