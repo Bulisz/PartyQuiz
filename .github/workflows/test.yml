@@ -43,17 +43,11 @@ jobs:
         name: xUnit Tests
         path: /home/runner/work/PartyQuiz/PartyQuiz/TestResults/*.trx
         reporter: dotnet-trx
-  update-master:
-    name: Merge test into master after tests
-    if: success()
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: merge
-        uses: mtanzi/action-automerge@v1
-        id: merge
-        with:
-          github_token: ${{ secrets.MASTER_AUTOMERGE_TOKEN }}
-          source: 'test'
-          target: 'master'
+    - name: merge
+      uses: mtanzi/action-automerge@v1
+      if: success()
+      id: merge
+      with:
+        github_token: ${{ secrets.MASTER_AUTOMERGE_TOKEN }}
+        source: 'test'
+        target: 'master'
