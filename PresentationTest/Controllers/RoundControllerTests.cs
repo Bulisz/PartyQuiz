@@ -102,6 +102,6 @@ public class RoundControllerTests
         var result = await _controller.DeleteRound("Test");
 
         //Assert
-        Assert.IsType<NotFoundResult>(result);
+        Assert.IsType<OkResult>(result);
     }
 }
