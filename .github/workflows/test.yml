@@ -13,7 +13,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  build:
+  Test_and_merge:
     runs-on: ubuntu-latest
 
     steps:
@@ -43,7 +43,7 @@ jobs:
         name: xUnit Tests
         path: /home/runner/work/PartyQuiz/PartyQuiz/TestResults/*.trx
         reporter: dotnet-trx
-    - name: merge
+    - name: Merge
       uses: mtanzi/action-automerge@v1
       if: success()
       id: merge
